@@ -9,11 +9,11 @@ contract List {
         return array;
     }
 
-	/*
-		X ensures: All previous values of the array remain unchanged
-		X ensures: The added value is found at the end of the Array
-		X ensures: The Length of the array is the old length + 1 
-	*/
+    /*
+        X ensures: All previous values of the array remain unchanged
+        X ensures: The added value is found at the end of the Array
+        X ensures: The Length of the array is the old length + 1 
+    */
 
     /// @notice postcondition forall (uint i) !(0 <= i && i < array.length - 1) || (array[i] == __verifier_old_int(array[i]))
     /// @notice postcondition array[array.length - 1] == num 
