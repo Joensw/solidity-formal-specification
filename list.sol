@@ -25,6 +25,7 @@ contract List {
     }
 
     /// @notice postcondition ret == array.length
+    /// @notice postcondition forall (uint i) !(0 <= i && i < array.length) || (array[i] == __verifier_old_int(array[i]))
 
     function size() public view returns (uint256 ret) {
         ret = array.length;
@@ -38,6 +39,7 @@ contract List {
 
     /// @notice postcondition exists (uint i) (!ret || (0 <= i && i < array.length && array[i] == num))
     /// @notice postcondition forall (uint i) (ret || !(0 <= i && i < array.length) || array[i] != num)
+    /// @notice postcondition forall (uint i) !(0 <= i && i < array.length) || (array[i] == __verifier_old_int(array[i]))
 
     function contains(int256 num) public view returns (bool ret) {
 
@@ -61,8 +63,6 @@ contract List {
         ensures: the other array elements stay unchanged
     */
 
-    /// @notice precondition array.length >= 1
-    /// @notice precondition index >= 0 && index < array.length
     /// @notice postcondition array.length == __verifier_old_uint(array.length) - 1
     /// @notice postcondition forall (uint i) !(i >= 0 && i < index) || (array[i] == __verifier_old_int(array[i]))
     /// @notice postcondition forall (uint i) !(i >= index && i < array.length) || (array[i] == __verifier_old_int(array[i + 1]))
@@ -70,6 +70,9 @@ contract List {
     /// @notice modifies array
 
     function remove(uint256 index) public returns (int256 ret) {
+
+        require(index < array.length);
+        require(index >= 0);
 
         ret = array[index];
 
@@ -79,7 +82,6 @@ contract List {
         /// @notice invariant forall (uint k) !(k >= 0 && k < index) || (array[k] == __verifier_old_int(array[k]))
         /// @notice invariant forall (uint k) !(k >= index && k < i) || (array[k] == __verifier_old_int(array[k + 1]))
         /// @notice invariant forall (uint k) !(k >= i && k < array.length) || (array[k] == __verifier_old_int(array[k]))
-
 
         for (uint256 i = index; i < array.length - 1; i++) {
             array[i] = array[i + 1];
@@ -94,10 +96,13 @@ contract List {
         ensures: The array remains unchanged (should be implicit through view)
     */
 
-    /// @notice precondition index >= 0 && index < array.length
     /// @notice postcondition ret == array[index]
+    /// @notice postcondition forall (uint i) !(0 <= i && i < array.length) || (array[i] == __verifier_old_int(array[i]))
 
     function get(uint256 index) public view returns (int256 ret) {
+        require(index < array.length);
+        require(index >= 0);
+
         ret = array[index];
     }
 }
