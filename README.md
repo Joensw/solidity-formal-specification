@@ -6,16 +6,20 @@ This repository is an ongoing WIP as part of my thesis.
 
 # Current progress
 
-- **Simple list**
+## Simple list
   - [x] implementation
   - [x] specification (solc-verify)
   - [x] verified
-- **Set**
+ 
+## Set
   - [x] implementation
   - [x] specification (solc-verify)
-  - [ ] unverified. The postcondition specifying that the removed element in the values array will be overwritten by the last element of the array doesn't work as of yet. All the other    conditions work. 
-    
-    Note 1: the method remove has the precondition that there is actually an element to remove, this is needed by the prover for the current specification, but is more of a band aid fix. Ideally this isn't needed, as we would like guarantees even if the Set is empty.
-    
-    Note 2: the current spec includes: ```modifies set```, which isnt wrong but is essentially a catch all, it would be nice if we could specifiy more exactly what the method modifies however set.values and set.location don't seem to suffice for the prover.
- 
+  - [x] almost verified. (See Note.)
+        
+    Note: The contract can be verified with the caveat that the remove function has a certain precondition. Technically the precondition is always upheld anyway but to make this explicit and for a cleaner specification it will be factored out into a contract invariant.
+   
+## Iterable Mapping
+TODO
+
+## Strict Mapping
+TODO
