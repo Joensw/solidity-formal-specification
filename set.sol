@@ -1,6 +1,7 @@
 pragma solidity ^0.7.0;
 
 
+/// @notice invariant forall (uint i) !(set.location[i] != 0) || (set.location[i] - 1 < set.values.length) && (set.values[set.location[i] - 1] == i)
 contract Contract {
 
     struct Set {
@@ -10,7 +11,7 @@ contract Contract {
 
     Set set;
 
-    // Just for testing purposes 
+    // For testing purposes can be ignored
 
     function get() public view returns (uint[] memory) {
         return set.values;
@@ -101,7 +102,6 @@ contract Contract {
 
     */
 
-    /// @notice precondition forall (uint i) !(set.location[i] != 0) || (set.location[i] - 1 < set.values.length) && (set.values[set.location[i] - 1] == i)
     /// @notice modifies set.values if success
     /// @notice modifies set.location if success
     /// @notice postcondition !success || (__verifier_old_uint(set.location[num]) != 0 && __verifier_old_uint(set.values.length) != 0)
