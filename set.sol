@@ -11,18 +11,29 @@ contract Contract {
 
     Set set;
 
-    // For testing purposes can be ignored
+    // For testing purposes, can be ignored
 
     function get() public view returns (uint[] memory) {
         return set.values;
     }
 
-
     /// @notice postcondition ret == set.values.length
+    /// @notice postcondition forall (uint i) !(0 <= i && i < set.values.length) || (set.values[i] == __verifier_old_uint(set.values[i]))
+    /// @notice postcondition forall (uint i)  (set.location[i] == __verifier_old_uint(set.location[i]))
 
     function size() public view returns (uint ret) {
         return set.values.length;
     }
+
+    /// @notice postcondition !(ret) || set.location[num] != 0
+    /// @notice postcondition ret || set.location[num] == 0
+    /// @notice postcondition forall (uint i) !(0 <= i && i < set.values.length) || (set.values[i] == __verifier_old_uint(set.values[i]))
+    /// @notice postcondition forall (uint i)  (set.location[i] == __verifier_old_uint(set.location[i]))
+
+    function contains(uint num) public view returns (bool ret) {
+        return set.location[num] != 0;
+    }
+
 
     /*
         => If item is in i.e set.location[num] != 0
@@ -62,13 +73,6 @@ contract Contract {
             return true;
         }
         return false;
-    }
-
-    /// @notice postcondition !(ret) || set.location[num] != 0
-    /// @notice postcondition ret || set.location[num] == 0
-    
-    function contains(uint num) public view returns (bool ret) {
-        return set.location[num] != 0;
     }
 
     /*
