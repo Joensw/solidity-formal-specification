@@ -4,7 +4,8 @@ contract List {
 
     int256[] private array;
 
-    // For testing purposes
+    // For testing purposes, can be ignored
+    
     function getData() public view returns (int256[] memory) {
         return array;
     }
