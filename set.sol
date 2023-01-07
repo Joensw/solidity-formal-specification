@@ -84,6 +84,7 @@ contract Contract {
 
             ensure: location[item] is set to 0
             ensure: values.length reduces by one
+            ensure: num no longer appears in values
 
 
             => If the item was the last element of values
@@ -117,6 +118,7 @@ contract Contract {
     /// @notice postcondition forall (uint i) success || set.location[i] == __verifier_old_uint(set.location[i])
     /// @notice postcondition !success || set.values.length == __verifier_old_uint(set.values.length) - 1
     /// @notice postcondition !success || set.location[num] == 0
+    /// @notice postcondition forall (uint i) (!success) || !(0 <= i && i < set.values.length) || set.values[i] != num
     /// @notice postcondition forall (uint i) (!success) || !(num == __verifier_old_uint(set.values[set.values.length - 1])) || !(i != num) || set.location[i] == __verifier_old_uint(set.location[i])
     /// @notice postcondition forall (uint i) (!success) || !(num == __verifier_old_uint(set.values[set.values.length - 1])) || !(0 <= i && i < set.values.length) || (set.values[i] == __verifier_old_uint(set.values[i]))
     /// @notice postcondition forall (uint i) (!success) || (num == __verifier_old_uint(set.values[set.values.length - 1])) || !(0 <= i && i < set.values.length && i != __verifier_old_uint(set.location[num] - 1)) || (set.values[i] == __verifier_old_uint(set.values[i]))
