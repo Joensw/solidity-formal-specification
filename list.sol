@@ -26,7 +26,6 @@ contract List {
     }
 
     /// @notice postcondition ret == array.length
-    /// @notice postcondition forall (uint i) !(0 <= i && i < array.length) || (array[i] == __verifier_old_int(array[i]))
 
     function size() public view returns (uint256 ret) {
         ret = array.length;
@@ -40,7 +39,6 @@ contract List {
 
     /// @notice postcondition exists (uint i) (!ret || (0 <= i && i < array.length && array[i] == num))
     /// @notice postcondition forall (uint i) (ret || !(0 <= i && i < array.length) || array[i] != num)
-    /// @notice postcondition forall (uint i) !(0 <= i && i < array.length) || (array[i] == __verifier_old_int(array[i]))
 
     function contains(int256 num) public view returns (bool ret) {
 
@@ -98,7 +96,6 @@ contract List {
     */
 
     /// @notice postcondition ret == array[index]
-    /// @notice postcondition forall (uint i) !(0 <= i && i < array.length) || (array[i] == __verifier_old_int(array[i]))
 
     function get(uint256 index) public view returns (int256 ret) {
         require(index < array.length);
