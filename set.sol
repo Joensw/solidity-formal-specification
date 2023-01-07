@@ -131,12 +131,8 @@ contract Contract {
         uint index = set.location[num] - 1;
         uint last = set.values[set.values.length - 1];
 
-        // this might be unccessary TODO check 
-        if (num != last) {
-            // set the location of last element to that of the element we want to remove
-            set.location[last] = index + 1;
-            set.values[index] = last;
-        }
+        set.location[last] = index + 1;
+        set.values[index] = last;
 
         delete set.location[num];
 
