@@ -37,13 +37,12 @@ contract List {
         ensures: The array remains unchanged (should be implicit through view)
     */
 
-    /// @notice postcondition exists (uint i) (!ret || (0 <= i && i < array.length && array[i] == num))
-    /// @notice postcondition forall (uint i) (ret || !(0 <= i && i < array.length) || array[i] != num)
+    /// @notice postcondition exists (uint i) (!isContained || (0 <= i && i < array.length && array[i] == num))
+    /// @notice postcondition forall (uint i) (isContained || !(0 <= i && i < array.length) || array[i] != num)
 
-    function contains(int256 num) public view returns (bool ret) {
+    function contains(int256 num) public view returns (bool isContained) {
 
         /// @notice invariant i >= 0 && i <= array.length
-        /// @notice invariant i == 0 || array[i-1] != num
         /// @notice invariant forall (uint k) !(k >= 0 && k < i) || (array[k] != num)
 
         for (uint256 i = 0; i < array.length; i++) {
