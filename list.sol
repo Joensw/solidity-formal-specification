@@ -89,6 +89,73 @@ contract List {
     }
 
     /*
+        Remove first occurence
+        iterate on found delete and shift and return
+        Incase of deletion every other element can still be found just  moved
+
+        ensures: success => modifies array
+        ensures: success => length is reduced by one
+        ensures !success => length is the same aas before
+    */
+
+    /// @notice modifies array if (success)
+    /// @notice postcondition !(success) || array.length == __verifier_old_uint(array.length) - 1
+    /// @notice postcondition forall (uint i) !(success) || !(i >= 0 && i < outIndex) || (array[i] == __verifier_old_int(array[i]))
+    /// @notice postcondition forall (uint i) !(success) || !(i >= outIndex && i < array.length) || (array[i] == __verifier_old_int(array[i + 1]))
+    /// @notice postcondition (success) || array.length == __verifier_old_uint(array.length)
+
+    function removeObject(int256 val) public returns (bool success, uint outIndex) { 
+        bool found = false;
+        // we can use an normal int for the index as the max length of an array in solidity is 2^(64-1)
+        uint index = 0;
+        
+        /// @notice invariant i >= 0 && i <= array.length
+        /// @notice invariant forall (uint k) !(k >= 0 && k < i) || (array[k] != val)
+
+        for (uint256 i = 0; i < array.length; i++) {
+            if (array[i] == val) {
+                found = true;
+                index = i;
+                break;
+            }
+        }
+
+        if (found) {
+            remove(index);
+            return (true, index);
+        }
+
+        // what we return here as an index doesnt matter, as the first return value is false anyway
+        return (false, index);
+    }
+
+    /// @notice postcondition !valid || array[index] == val
+    /// @notice postcondition forall (uint i) !valid || !(i >= 0 && i < index) || array[i] != val
+    /// @notice postcondition forall (uint i) valid || !(i >= 0 && i < array.length) || array[i] != val
+
+    function indexOf(int val) public view returns (bool valid, uint index){
+        index = 0;
+
+        /// @notice invariant i >= 0 && i <= array.length
+        /// @notice invariant forall (uint k) !(k >= 0 && k < i) || (array[k] != val)
+
+        for (uint64 i = 0; i < array.length; i++) {
+            if (array[i] == val){
+                index = i;
+                return (true, index);
+            }
+        }
+        return (false, index);
+    }
+
+    /// @notice postcondition !out || array.length == 0
+    /// @notice postcondition out || array.length > 0
+
+    function isEmpty() public view returns (bool out) {
+        out = array.length == 0;
+    }
+
+    /*
         requires: index < array.length
         ensures: the return value is the value at the specified index in array
         ensures: The array remains unchanged (should be implicit through view)
