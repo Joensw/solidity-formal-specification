@@ -136,4 +136,20 @@ contract Contract {
         set.values.pop(); 
         return true;
     } 
+
+    /// @notice postcondition ret == set.values[index]
+
+    function get(uint256 index) public view returns (uint256 ret) {
+        require(index < set.values.length);
+        require(index >= 0);
+
+        ret = set.values[index];
+    }
+
+    /// @notice postcondition !out || set.values.length == 0
+    /// @notice postcondition out || set.values.length > 0
+
+    function isEmpty() public view returns (bool out) {
+        out = set.values.length == 0;
+    }
 }
