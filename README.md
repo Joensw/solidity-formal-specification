@@ -15,8 +15,8 @@ This repository is an ongoing WIP as part of my thesis.
  
 ## Set
   - [x] implementation
-  - [x] specification (solc-verify)
-  - [x] verified
+  - [x] specification (solc-verify) (Ideally the spec for isEmpty also makes guarantees for the state of the mapping, this currently isnt possible as we need stronger invariants)
+  - [x] verified 
         
    
 ## Iterable Mapping
