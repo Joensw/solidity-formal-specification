@@ -10,6 +10,12 @@ contract List {
         return array;
     }
 
+    /// @notice postcondition array.length == 0
+
+    constructor() {
+        array = new int[](0);
+    }
+
     /*
         X ensures: All previous values of the array remain unchanged
         X ensures: The added value is found at the end of the Array
@@ -39,6 +45,7 @@ contract List {
 
     /// @notice postcondition exists (uint i) (!isContained || (0 <= i && i < array.length && array[i] == num))
     /// @notice postcondition forall (uint i) (isContained || !(0 <= i && i < array.length) || array[i] != num)
+    /// @notice postcondition forall (uint i) !(0 <= i && i < array.length) || (array[i] == __verifier_old_int(array[i]))
 
     function contains(int256 num) public view returns (bool isContained) {
 
