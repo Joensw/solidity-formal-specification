@@ -23,6 +23,7 @@ contract IterableMapping {
     }
 
     function get(address _key) public view returns (uint) {
+        require(imap.indexOf[_key] != 0);
         return imap.values[_key];
     }
 
@@ -33,6 +34,10 @@ contract IterableMapping {
 
     function size() public view returns (uint) {
         return imap.keys.length;
+    }
+
+    function containsKey(address _key) public view returns (bool) {
+        return imap.indexOf[_key] != 0;
     }
 
     /// @notice postcondition imap.values[_key] == _value
