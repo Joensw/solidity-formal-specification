@@ -1,10 +1,10 @@
 pragma solidity ^0.7.0;
 // dont really need this as again we dont care about the non-contained addresses, set will straighten them out anyway
-// @notice invariant forall (address a) !(imap.indexOf[a] == 0) || (imap.values[a] == 0)
 
 
 /// @notice invariant forall (address a) !(imap.indexOf[a] != 0) || (imap.indexOf[a] - 1 < imap.keys.length) && (imap.keys[imap.indexOf[a] - 1] == a)
 /// @notice invariant forall (uint i) !(0 <= i && i < imap.keys.length) || (imap.indexOf[imap.keys[i]] - 1 == i)
+/// @notice invariant forall (address a) !(imap.indexOf[a] == 0) || (imap.values[a] == 0)
 
 contract IterableMapping {
 
@@ -22,21 +22,30 @@ contract IterableMapping {
         return imap.keys;
     }
 
-    function get(address _key) public view returns (uint) {
-        require(imap.indexOf[_key] != 0);
+    /// @notice postcondition value == imap.values[_key]
+    /// @notice postcondition !(imap.indexOf[_key] == 0) ||(value == 0)
+
+    function get(address _key) public view returns (uint value) {
         return imap.values[_key];
     }
 
-    function get(uint _index) public view returns (uint) {
+    /// @notice postcondition value == imap.values[imap.keys[_index]]
+
+    function getIndex(uint _index) public view returns (uint value) {
         require(_index < imap.keys.length);
         return imap.values[imap.keys[_index]];
     }
 
-    function size() public view returns (uint) {
+    /// @notice postcondition out == imap.keys.length
+
+    function size() public view returns (uint out) {
         return imap.keys.length;
     }
 
-    function containsKey(address _key) public view returns (bool) {
+    /// @notice postcondition exists (uint i) !out || !(0 <= i && i < imap.keys.length) || imap.keys[i] == _key
+    /// @notice postcondition forall (uint i) out || !(0 <= i && i < imap.keys.length) || imap.keys[i] != _key
+
+    function containsKey(address _key) public view returns (bool out) {
         return imap.indexOf[_key] != 0;
     }
 
