@@ -1,28 +1,29 @@
 pragma solidity ^0.7.0;
 
-contract StrictMap {
+library StrictMaps {
 
-    // Shouldn't be public as we want to encapsulate access
-    mapping (address => uint) public map;
-
-    /// @notice postcondition forall (address a) (map[a] == __verifier_old_uint(map[a]))
-
-    function get(address key) public view returns (uint contents) {
-        contents = map[key];
+    struct StrictMap {
+        mapping (address => uint) _map;
     }
 
-    /// @notice postcondition forall (address a) !(a != msg.sender ) || (map[a] == __verifier_old_uint(map[a]))
-    /// @notice postcondition map[msg.sender] == value
+    /// @notice postcondition contents == self._map[key]
 
-    function set(uint value) public {
-        map[msg.sender] = value;
+    function get(StrictMap storage self, address key) public view returns (uint contents) {
+        contents = self._map[key];
     }
 
-    /// @notice postcondition forall (address a) !(a != target) || (map[a] == __verifier_old_uint(map[a]))
-    /// @notice postcondition map[target] == __verifier_old_uint(map[target]) + amount
+    /// @notice postcondition forall (address a) !(a != msg.sender ) || (self._map[a] == __verifier_old_uint(self._map[a]))
+    /// @notice postcondition self._map[msg.sender] == value
 
-    function deposit(address target, uint amount) public {
-        map[target] += amount;
+    function set(StrictMap storage self, uint value) public {
+        self._map[msg.sender] = value;
+    }
+
+    /// @notice postcondition forall (address a) !(a != target) || (self._map[a] == __verifier_old_uint(self._map[a]))
+    /// @notice postcondition self._map[target] == __verifier_old_uint(self._map[target]) + amount
+
+    function deposit(StrictMap storage self, address target, uint amount) public {
+        self._map[target] += amount;
     }
 
 }
