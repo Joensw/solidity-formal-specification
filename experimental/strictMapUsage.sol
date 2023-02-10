@@ -1,41 +1,40 @@
 
 pragma solidity ^0.7.0;
 
-library StrictMap {
+library StrictMaps {
 
-    struct Strictmapping {
-        mapping (address => uint) map;
+    struct StrictMap {
+        mapping (address => uint) _map;
     }
 
-    /// @notice postcondition contents == self.map[key]
+    /// @notice postcondition contents == self._map[key]
 
-    function get(Strictmapping storage self, address key) public view returns (uint contents) {
-        contents = self.map[key];
+    function get(StrictMap storage self, address key) public view returns (uint contents) {
+        contents = self._map[key];
     }
 
-    /// @notice postcondition forall (address a) !(a != msg.sender ) || (self.map[a] == __verifier_old_uint(self.map[a]))
-    /// @notice postcondition self.map[msg.sender] == value
+    /// @notice postcondition forall (address a) !(a != msg.sender ) || (self._map[a] == __verifier_old_uint(self._map[a]))
+    /// @notice postcondition self._map[msg.sender] == value
 
-    function set(Strictmapping storage self, uint value) public {
-        self.map[msg.sender] = value;
+    function set(StrictMap storage self, uint value) public {
+        self._map[msg.sender] = value;
     }
 
-    /// @notice postcondition forall (address a) !(a != target) || (self.map[a] == __verifier_old_uint(self.map[a]))
-    /// @notice postcondition self.map[target] == __verifier_old_uint(self.map[target]) + amount
+    /// @notice postcondition forall (address a) !(a != target) || (self._map[a] == __verifier_old_uint(self._map[a]))
+    /// @notice postcondition self._map[target] == __verifier_old_uint(self._map[target]) + amount
 
-    function deposit(Strictmapping storage self, address target, uint amount) public {
-        self.map[target] += amount;
+    function deposit(StrictMap storage self, address target, uint amount) public {
+        self._map[target] += amount;
     }
-
 }
 
 
 
 contract ExampleUsage {
 
-    using StrictMap for StrictMap.Strictmapping;
+    using StrictMaps for StrictMaps.StrictMap;
 
-    StrictMap.Strictmapping sm;
+    StrictMaps.StrictMap sm;
 
     function setEntry(uint value) public {
         sm.set(value);
