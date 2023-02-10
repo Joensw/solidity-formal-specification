@@ -1,17 +1,51 @@
 pragma solidity ^0.7.0;
 
+library SetIterator {
+
+    struct Iterator {
+        uint index;
+        uint[] items;
+    }
+ 
+    // For testing purposes, can be ignored
+
+    function get(Iterator storage self) public view returns (uint[] memory) {
+        return self.items;
+    }
+
+    /// @notice postcondition !ret || self.index < self.items.length
+    /// @notice postcondition ret || self.index >= self.items.length
+
+    function hasNext(Iterator storage self) public view returns (bool ret) {
+        return self.index < self.items.length;
+    }
+
+    /// @notice postcondition item == __verifier_old_uint(self.items[self.index])
+    /// @notice postcondition self.index == __verifier_old_uint(self.index) + 1
+    /// @notice postcondition forall (uint i) !(0 <= i && i < self.items.length) || self.items[i] == __verifier_old_uint(self.items[i])
+
+    function next(Iterator storage self) public returns (uint item) {
+        item = self.items[self.index];
+        self.index++;
+    }
+}
 
 /// @notice invariant forall (uint i) !(set.location[i] != 0) || (set.location[i] - 1 < set.values.length) && (set.values[set.location[i] - 1] == i)
 /// @notice invariant forall (uint i) !(0 <= i && i < set.values.length) || (set.location[set.values[i]] - 1 == i)
 
-contract Contract {
+contract SetContract {
+
+    using SetIterator for SetIterator.Iterator;
+
 
     struct Set {
         uint[] values;
         mapping (uint => uint) location;
     }
 
-    Set set;
+    Set private set;
+
+    SetIterator.Iterator private it;
 
     // For testing purposes, can be ignored
 
@@ -137,6 +171,13 @@ contract Contract {
         return true;
     } 
 
+    /// @notice postcondition !out || set.values.length == 0
+    /// @notice postcondition out || set.values.length > 0
+
+    function isEmpty() public view returns (bool out) {
+        out = set.values.length == 0;
+    }
+
     /// @notice postcondition ret == set.values[index]
 
     function get(uint256 index) public view returns (uint256 ret) {
@@ -146,10 +187,21 @@ contract Contract {
         ret = set.values[index];
     }
 
-    /// @notice postcondition !out || set.values.length == 0
-    /// @notice postcondition out || set.values.length > 0
+    // REGION: Iterator
 
-    function isEmpty() public view returns (bool out) {
-        out = set.values.length == 0;
+    /// @notice modifies it
+
+    function resetIterator() public {
+        it = SetIterator.Iterator(0, set.values);
+    }
+
+    function iteratorHasNext() public view returns (bool) {
+        return it.hasNext();
+    }
+
+    /// @notice modifies it
+
+    function iteratorNext() public returns (uint) {
+        return it.next();
     }
 }
