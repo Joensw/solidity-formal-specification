@@ -33,7 +33,7 @@ library SetIterator {
 /// @notice invariant forall (uint i) !(set.location[i] != 0) || (set.location[i] - 1 < set.values.length) && (set.values[set.location[i] - 1] == i)
 /// @notice invariant forall (uint i) !(0 <= i && i < set.values.length) || (set.location[set.values[i]] - 1 == i)
 
-contract SetContract {
+contract Sets {
 
     using SetIterator for SetIterator.Iterator;
 
