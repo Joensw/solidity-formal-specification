@@ -1,6 +1,5 @@
+// SPDX-License-Identifier: MIT
 pragma solidity ^0.7.0;
-// dont really need this as again we dont care about the non-contained addresses, set will straighten them out anyway
-
 
 /// @notice invariant forall (address a) !(imap.indexOf[a] != 0) || (imap.indexOf[a] - 1 < imap.keys.length) && (imap.keys[imap.indexOf[a] - 1] == a)
 /// @notice invariant forall (uint i) !(0 <= i && i < imap.keys.length) || (imap.indexOf[imap.keys[i]] - 1 == i)

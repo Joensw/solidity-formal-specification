@@ -1,45 +1,21 @@
-
+// SPDX-License-Identifier: MIT
 pragma solidity ^0.7.0;
 
-library StrictMaps {
-
-    struct StrictMap {
-        mapping (address => uint) _map;
-    }
-
-    /// @notice postcondition contents == self._map[key]
-
-    function get(StrictMap storage self, address key) public view returns (uint contents) {
-        contents = self._map[key];
-    }
-
-    /// @notice postcondition forall (address a) !(a != msg.sender ) || (self._map[a] == __verifier_old_uint(self._map[a]))
-    /// @notice postcondition self._map[msg.sender] == value
-
-    function set(StrictMap storage self, uint value) public {
-        self._map[msg.sender] = value;
-    }
-
-    /// @notice postcondition forall (address a) !(a != target) || (self._map[a] == __verifier_old_uint(self._map[a]))
-    /// @notice postcondition self._map[target] == __verifier_old_uint(self._map[target]) + amount
-
-    function deposit(StrictMap storage self, address target, uint amount) public {
-        self._map[target] += amount;
-    }
-}
-
-
+import "./../strictMap.sol";
 
 contract ExampleUsage {
 
     using StrictMaps for StrictMaps.StrictMap;
 
-    StrictMaps.StrictMap sm;
+    // The StrictMap sm is private, access control from the outside is managed over the setEntry and getEntry functions
+    StrictMaps.StrictMap private sm;
 
+    // The StrictMap at location msg.sender will be set to the value parameter. It is not necessary to pass msg.sender to the function
     function setEntry(uint value) public {
         sm.set(value);
     }
 
+    // The Caller may only see their own entry of the mapping and not that of other caller addresses
     function getEntry() public view returns (uint contents) {
         return sm.get(msg.sender);
     }
