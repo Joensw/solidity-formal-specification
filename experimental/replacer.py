@@ -3,7 +3,7 @@ import sys
 
 def replace(fileName, keyword: str, replacement: str):
     fIn = open(fileName, "rt")
-    fOut = open(f"<{replacement}>_" + fileName, "wt")
+    fOut = open(f"{replacement}_" + fileName, "wt")
     for line in fIn:
         fOut.write(line.replace(keyword, replacement))
     fIn.close()
