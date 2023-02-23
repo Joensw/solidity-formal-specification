@@ -35,6 +35,11 @@ library SetIterator {
     }
 }
 
+// The first 6 lines of every method represent the following invariants:
+// invariant forall (uint i) forall (uint j) !(self.location[i] == 0) || !(0 <= j && j < self.values.length) || (self.values[j] != i)
+// invariant forall (uint i) !(self.location[i] != 0) || (self.location[i] - 1 < self.values.length) && (self.values[self.location[i] - 1] == i)
+// invariant forall (uint i) !(0 <= i && i < self.values.length) || (self.location[self.values[i]] - 1 == i)
+
 library Sets {
 
     struct Set {
@@ -48,6 +53,8 @@ library Sets {
         return self.values;
     }
 
+    /// @notice precondition forall (uint i) forall (uint j) !(self.location[i] == 0) || !(0 <= j && j < self.values.length) || (self.values[j] != i)
+    /// @notice postcondition forall (uint i) forall (uint j) !(self.location[i] == 0) || !(0 <= j && j < self.values.length) || (self.values[j] != i)
     /// @notice precondition forall (uint i) !(0 <= i && i < self.values.length) || (self.location[self.values[i]] - 1 == i)
     /// @notice postcondition forall (uint i) !(0 <= i && i < self.values.length) || (self.location[self.values[i]] - 1 == i)
     /// @notice precondition forall (uint i) !(self.location[i] != 0) || (self.location[i] - 1 < self.values.length) && (self.values[self.location[i] - 1] == i)
@@ -58,6 +65,8 @@ library Sets {
         return self.values.length;
     }
 
+    /// @notice precondition forall (uint i) forall (uint j) !(self.location[i] == 0) || !(0 <= j && j < self.values.length) || (self.values[j] != i)
+    /// @notice postcondition forall (uint i) forall (uint j) !(self.location[i] == 0) || !(0 <= j && j < self.values.length) || (self.values[j] != i)
     /// @notice precondition forall (uint i) !(0 <= i && i < self.values.length) || (self.location[self.values[i]] - 1 == i)
     /// @notice postcondition forall (uint i) !(0 <= i && i < self.values.length) || (self.location[self.values[i]] - 1 == i)
     /// @notice precondition forall (uint i) !(self.location[i] != 0) || (self.location[i] - 1 < self.values.length) && (self.values[self.location[i] - 1] == i)
@@ -86,7 +95,9 @@ library Sets {
         => else:
         success == true <=> self.lcoation[num] != 0
     */
-
+    
+    /// @notice precondition forall (uint i) forall (uint j) !(self.location[i] == 0) || !(0 <= j && j < self.values.length) || (self.values[j] != i)
+    /// @notice postcondition forall (uint i) forall (uint j) !(self.location[i] == 0) || !(0 <= j && j < self.values.length) || (self.values[j] != i)
     /// @notice precondition forall (uint i) !(0 <= i && i < self.values.length) || (self.location[self.values[i]] - 1 == i)
     /// @notice postcondition forall (uint i) !(0 <= i && i < self.values.length) || (self.location[self.values[i]] - 1 == i)
     /// @notice precondition forall (uint i) !(self.location[i] != 0) || (self.location[i] - 1 < self.values.length) && (self.values[self.location[i] - 1] == i)
@@ -145,6 +156,8 @@ library Sets {
 
     */
 
+    /// @notice precondition forall (uint i) forall (uint j) !(self.location[i] == 0) || !(0 <= j && j < self.values.length) || (self.values[j] != i)
+    /// @notice postcondition forall (uint i) forall (uint j) !(self.location[i] == 0) || !(0 <= j && j < self.values.length) || (self.values[j] != i)
     /// @notice precondition forall (uint i) !(0 <= i && i < self.values.length) || (self.location[self.values[i]] - 1 == i)
     /// @notice postcondition forall (uint i) !(0 <= i && i < self.values.length) || (self.location[self.values[i]] - 1 == i)
     /// @notice precondition forall (uint i) !(self.location[i] != 0) || (self.location[i] - 1 < self.values.length) && (self.values[self.location[i] - 1] == i)
@@ -182,6 +195,8 @@ library Sets {
         return true;
     } 
 
+    /// @notice precondition forall (uint i) forall (uint j) !(self.location[i] == 0) || !(0 <= j && j < self.values.length) || (self.values[j] != i)
+    /// @notice postcondition forall (uint i) forall (uint j) !(self.location[i] == 0) || !(0 <= j && j < self.values.length) || (self.values[j] != i)
     /// @notice precondition forall (uint i) !(0 <= i && i < self.values.length) || (self.location[self.values[i]] - 1 == i)
     /// @notice postcondition forall (uint i) !(0 <= i && i < self.values.length) || (self.location[self.values[i]] - 1 == i)   
     /// @notice precondition forall (uint i) !(self.location[i] != 0) || (self.location[i] - 1 < self.values.length) && (self.values[self.location[i] - 1] == i)
@@ -193,6 +208,8 @@ library Sets {
         out = self.values.length == 0;
     }
 
+    /// @notice precondition forall (uint i) forall (uint j) !(self.location[i] == 0) || !(0 <= j && j < self.values.length) || (self.values[j] != i)
+    /// @notice postcondition forall (uint i) forall (uint j) !(self.location[i] == 0) || !(0 <= j && j < self.values.length) || (self.values[j] != i)
     /// @notice precondition forall (uint i) !(0 <= i && i < self.values.length) || (self.location[self.values[i]] - 1 == i)
     /// @notice postcondition forall (uint i) !(0 <= i && i < self.values.length) || (self.location[self.values[i]] - 1 == i)
     /// @notice precondition forall (uint i) !(self.location[i] != 0) || (self.location[i] - 1 < self.values.length) && (self.values[self.location[i] - 1] == i)
