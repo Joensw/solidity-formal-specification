@@ -5,15 +5,15 @@ pragma solidity ^0.7.0;
 /// @notice invariant forall (uint i) !(0 <= i && i < imap.keys.length) || (imap.indexOf[imap.keys[i]] - 1 == i)
 /// @notice invariant forall (address a) !(imap.indexOf[a] == 0) || (imap.values[a] == 0)
 
-contract IterableMapping {
+contract IterableMappings {
 
-    struct IMap {
+    struct IterableMapping {
         address[] keys;
         mapping (address => uint) values;
         mapping (address => uint) indexOf;
     }
 
-    IMap imap;
+    IterableMapping imap;
 
     // For testing purposes, can be ignored
 
