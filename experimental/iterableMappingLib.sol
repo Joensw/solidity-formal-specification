@@ -194,13 +194,11 @@ library IterableMappings {
         if (self.indexOf[_key] == 0) return false;
     
 
-        // move last elemet of keys array to where out element we want to remove was
+        // move last elemet of keys array to where the element we want to remove was
         uint index = self.indexOf[_key] - 1;
         address lastKey = self.keys[self.keys.length - 1];
         self.keys[index] = lastKey;
         self.indexOf[lastKey] = index + 1;
-
-        // delete
 
         delete self.values[_key];
         delete self.indexOf[_key];

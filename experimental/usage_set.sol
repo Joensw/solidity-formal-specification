@@ -3,7 +3,6 @@ pragma solidity ^0.7.0;
 
 import "./address_genericSet.sol";
 
-
 contract ExampleUsage {
 
     using Sets for Sets.Set;
@@ -14,7 +13,7 @@ contract ExampleUsage {
 
     uint max_admins = 4;
 
-    constructor() public {
+    constructor() {
         admins.add(0x5B38Da6a701c568545dCfcB03FcB875f56beddC4);
         admins.add(0xAb8483F64d9C6d1EcF9b849Ae677dD3315835cb2);
     }
