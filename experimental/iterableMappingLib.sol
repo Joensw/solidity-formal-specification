@@ -6,6 +6,41 @@ pragma solidity ^0.7.0;
 // invariant forall (uint i) !(0 <= i && i < self.keys.length) || (self.indexOf[self.keys[i]] - 1 == i)
 // invariant forall (address a) !(self.indexOf[a] == 0) || (self.values[a] == 0)
 
+library IterableMappingIterator {
+
+    struct Iterator {
+        uint index;
+        address[] items;
+    }
+ 
+    // For testing purposes, can be ignored
+
+    function get(Iterator storage self) public view returns (address[] memory) {
+        return self.items;
+    }
+
+    function init(Iterator storage self, IterableMappings.IterableMapping storage itmap) public {
+        self.items = itmap.keys;
+        self.index = 0;
+    }
+
+    /// @notice postcondition !ret || self.index < self.items.length
+    /// @notice postcondition ret || self.index >= self.items.length
+
+    function hasNext(Iterator storage self) public view returns (bool ret) {
+        return self.index < self.items.length;
+    }
+
+    /// @notice postcondition item == __verifier_old_address(self.items[self.index])
+    /// @notice postcondition self.index == __verifier_old_uint(self.index) + 1
+    /// @notice postcondition forall (uint i) !(0 <= i && i < self.items.length) || self.items[i] == __verifier_old_address(self.items[i])
+
+    function next(Iterator storage self) public returns (address item) {
+        item = self.items[self.index];
+        self.index++;
+    }
+}
+
 library IterableMappings {
 
     struct IterableMapping {
