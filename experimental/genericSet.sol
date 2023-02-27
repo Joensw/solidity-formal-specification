@@ -14,8 +14,11 @@ library SetIterator {
         return self.items;
     }
 
+    /// @notice postcondition self.index == 0
+    /// @notice postcondition forall (uint i) !(0 <= i && i < self.items) || self.items[i] == set.items
+
     function init(Iterator storage self, Sets.Set storage set) public {
-        self.items = set.values;
+        self.items = set.items;
         self.index = 0;
     }
 
@@ -37,41 +40,41 @@ library SetIterator {
 }
 
 // The first 6 lines of every method represent the following invariants:
-// invariant forall (uint i) forall (uint j) !(self.location[i] == 0) || !(0 <= j && j < self.values.length) || (self.values[j] != i)
-// invariant forall (uint i) !(self.location[i] != 0) || (self.location[i] - 1 < self.values.length) && (self.values[self.location[i] - 1] == i)
-// invariant forall (uint i) !(0 <= i && i < self.values.length) || (self.location[self.values[i]] - 1 == i)
+// invariant forall (%TYPE% i) forall (uint j) !(self.location[i] == 0) || !(0 <= j && j < self.items.length) || (self.items[j] != i)
+// invariant forall (uint i) !(self.location[i] != 0) || (self.location[i] - 1 < self.items.length) && (self.items[self.location[i] - 1] == i)
+// invariant forall (%TYPE% i) !(0 <= i && i < self.items.length) || (self.location[self.items[i]] - 1 == i)
 
 library Sets {
 
     struct Set {
-        %TYPE%[] values;
+        %TYPE%[] items;
         mapping (%TYPE% => uint) location;
     }
 
     // For testing purposes, can be ignored
 
     function get(Set storage self) public view returns (%TYPE%[] memory) {
-        return self.values;
+        return self.items;
     }
 
-    /// @notice precondition forall (%TYPE% i) forall (uint j) !(self.location[i] == 0) || !(0 <= j && j < self.values.length) || (self.values[j] != i)
-    /// @notice postcondition forall (%TYPE% i) forall (uint j) !(self.location[i] == 0) || !(0 <= j && j < self.values.length) || (self.values[j] != i)
-    /// @notice precondition forall (uint i) !(0 <= i && i < self.values.length) || (self.location[self.values[i]] - 1 == i)
-    /// @notice postcondition forall (uint i) !(0 <= i && i < self.values.length) || (self.location[self.values[i]] - 1 == i)
-    /// @notice precondition forall (%TYPE% i) !(self.location[i] != 0) || (self.location[i] - 1 < self.values.length) && (self.values[self.location[i] - 1] == i)
-    /// @notice postcondition forall (%TYPE% i) !(self.location[i] != 0) || (self.location[i] - 1 < self.values.length) && (self.values[self.location[i] - 1] == i)
-    /// @notice postcondition ret == self.values.length
+    /// @notice precondition forall (%TYPE% i) forall (uint j) !(self.location[i] == 0) || !(0 <= j && j < self.items.length) || (self.items[j] != i)
+    /// @notice postcondition forall (%TYPE% i) forall (uint j) !(self.location[i] == 0) || !(0 <= j && j < self.items.length) || (self.items[j] != i)
+    /// @notice precondition forall (uint i) !(0 <= i && i < self.items.length) || (self.location[self.items[i]] - 1 == i)
+    /// @notice postcondition forall (uint i) !(0 <= i && i < self.items.length) || (self.location[self.items[i]] - 1 == i)
+    /// @notice precondition forall (%TYPE% i) !(self.location[i] != 0) || (self.location[i] - 1 < self.items.length) && (self.items[self.location[i] - 1] == i)
+    /// @notice postcondition forall (%TYPE% i) !(self.location[i] != 0) || (self.location[i] - 1 < self.items.length) && (self.items[self.location[i] - 1] == i)
+    /// @notice postcondition ret == self.items.length
 
     function size(Set storage self) public view returns (uint ret) {
-        return self.values.length;
+        return self.items.length;
     }
 
-    /// @notice precondition forall (%TYPE% i) forall (uint j) !(self.location[i] == 0) || !(0 <= j && j < self.values.length) || (self.values[j] != i)
-    /// @notice postcondition forall (%TYPE% i) forall (uint j) !(self.location[i] == 0) || !(0 <= j && j < self.values.length) || (self.values[j] != i)
-    /// @notice precondition forall (uint i) !(0 <= i && i < self.values.length) || (self.location[self.values[i]] - 1 == i)
-    /// @notice postcondition forall (uint i) !(0 <= i && i < self.values.length) || (self.location[self.values[i]] - 1 == i)
-    /// @notice precondition forall (%TYPE% i) !(self.location[i] != 0) || (self.location[i] - 1 < self.values.length) && (self.values[self.location[i] - 1] == i)
-    /// @notice postcondition forall (%TYPE% i) !(self.location[i] != 0) || (self.location[i] - 1 < self.values.length) && (self.values[self.location[i] - 1] == i)
+    /// @notice precondition forall (%TYPE% i) forall (uint j) !(self.location[i] == 0) || !(0 <= j && j < self.items.length) || (self.items[j] != i)
+    /// @notice postcondition forall (%TYPE% i) forall (uint j) !(self.location[i] == 0) || !(0 <= j && j < self.items.length) || (self.items[j] != i)
+    /// @notice precondition forall (uint i) !(0 <= i && i < self.items.length) || (self.location[self.items[i]] - 1 == i)
+    /// @notice postcondition forall (uint i) !(0 <= i && i < self.items.length) || (self.location[self.items[i]] - 1 == i)
+    /// @notice precondition forall (%TYPE% i) !(self.location[i] != 0) || (self.location[i] - 1 < self.items.length) && (self.items[self.location[i] - 1] == i)
+    /// @notice postcondition forall (%TYPE% i) !(self.location[i] != 0) || (self.location[i] - 1 < self.items.length) && (self.items[self.location[i] - 1] == i)
     /// @notice postcondition !(ret) || self.location[num] != 0
 
     function contains(Set storage self, %TYPE% num) public view returns (bool ret) {
@@ -81,44 +84,44 @@ library Sets {
 
     /*
         => If item is in i.e self.location[num] != 0
-        ensures: values length is the same
-        ensures: the items in values stay the same
+        ensures: items length is the same
+        ensures: the items in items stay the same
         ensures: the location mapping is identical to before
 
 
 
         => If item isnt in i.e self.location[num] == 0
-        ensures: the item can now be found at the end of values
-        ensures: values length has increase by 1
-        ensures: the other items in values hasn't been altered
+        ensures: the item can now be found at the end of items
+        ensures: items length has increase by 1
+        ensures: the other items in items hasn't been altered
         ensures: the location mapping hasnt been altered except at 'num'
 
         => else:
         success == true <=> self.lcoation[num] != 0
     */
-    /// @notice precondition forall (%TYPE% i) forall (uint j) !(self.location[i] == 0) || !(0 <= j && j < self.values.length) || (self.values[j] != i)
-    /// @notice postcondition forall (%TYPE% i) forall (uint j) !(self.location[i] == 0) || !(0 <= j && j < self.values.length) || (self.values[j] != i)
-    /// @notice precondition forall (uint i) !(0 <= i && i < self.values.length) || (self.location[self.values[i]] - 1 == i)
-    /// @notice postcondition forall (uint i) !(0 <= i && i < self.values.length) || (self.location[self.values[i]] - 1 == i)
-    /// @notice precondition forall (%TYPE% i) !(self.location[i] != 0) || (self.location[i] - 1 < self.values.length) && (self.values[self.location[i] - 1] == i)
-    /// @notice postcondition forall (%TYPE% i) !(self.location[i] != 0) || (self.location[i] - 1 < self.values.length) && (self.values[self.location[i] - 1] == i)
+    /// @notice precondition forall (%TYPE% i) forall (uint j) !(self.location[i] == 0) || !(0 <= j && j < self.items.length) || (self.items[j] != i)
+    /// @notice postcondition forall (%TYPE% i) forall (uint j) !(self.location[i] == 0) || !(0 <= j && j < self.items.length) || (self.items[j] != i)
+    /// @notice precondition forall (uint i) !(0 <= i && i < self.items.length) || (self.location[self.items[i]] - 1 == i)
+    /// @notice postcondition forall (uint i) !(0 <= i && i < self.items.length) || (self.location[self.items[i]] - 1 == i)
+    /// @notice precondition forall (%TYPE% i) !(self.location[i] != 0) || (self.location[i] - 1 < self.items.length) && (self.items[self.location[i] - 1] == i)
+    /// @notice postcondition forall (%TYPE% i) !(self.location[i] != 0) || (self.location[i] - 1 < self.items.length) && (self.items[self.location[i] - 1] == i)
     /// @notice modifies self.location[num] if self.location[num] == 0
-    /// @notice modifies self.values if self.location[num] == 0
-    /// @notice postcondition __verifier_old_uint(self.location[num]) != 0 || self.values[self.values.length - 1] == num
-    /// @notice postcondition __verifier_old_uint(self.location[num]) != 0 || self.location[num] == self.values.length
-    /// @notice postcondition __verifier_old_uint(self.location[num]) != 0 || self.values.length == __verifier_old_uint(self.values.length) +1
-    /// @notice postcondition forall (uint i) __verifier_old_uint(self.location[num]) != 0 || !(0 <= i && i < self.values.length - 1) || (self.values[i] == __verifier_old_%TYPE%(self.values[i]))
+    /// @notice modifies self.items if self.location[num] == 0
+    /// @notice postcondition __verifier_old_uint(self.location[num]) != 0 || self.items[self.items.length - 1] == num
+    /// @notice postcondition __verifier_old_uint(self.location[num]) != 0 || self.location[num] == self.items.length
+    /// @notice postcondition __verifier_old_uint(self.location[num]) != 0 || self.items.length == __verifier_old_uint(self.items.length) +1
+    /// @notice postcondition forall (uint i) __verifier_old_uint(self.location[num]) != 0 || !(0 <= i && i < self.items.length - 1) || (self.items[i] == __verifier_old_%TYPE%(self.items[i]))
     /// @notice postcondition forall (%TYPE% i) __verifier_old_uint(self.location[num]) != 0 || i == num || self.location[i] == __verifier_old_uint(self.location[i])
-    /// @notice postcondition __verifier_old_uint(self.location[num]) == 0 || self.values.length == __verifier_old_uint(self.values.length)
-    /// @notice postcondition forall (uint i) __verifier_old_uint(self.location[num]) == 0 || !(0 <= i && i < self.values.length) || (self.values[i] == __verifier_old_%TYPE%(self.values[i]))
+    /// @notice postcondition __verifier_old_uint(self.location[num]) == 0 || self.items.length == __verifier_old_uint(self.items.length)
+    /// @notice postcondition forall (uint i) __verifier_old_uint(self.location[num]) == 0 || !(0 <= i && i < self.items.length) || (self.items[i] == __verifier_old_%TYPE%(self.items[i]))
     /// @notice postcondition forall (%TYPE% i) __verifier_old_uint(self.location[num]) == 0 || self.location[i] == __verifier_old_uint(self.location[i])
     /// @notice postcondition (success && __verifier_old_uint(self.location[num]) == 0) || (!success && !(__verifier_old_uint(self.location[num]) == 0))
 
     function add(Set storage self, %TYPE% num) public returns (bool success) {
         if (self.location[num] == 0) {
-            // push first because 0 is standard value in mapping therefore location 1 refers to the first entry of values
-            self.values.push(num);
-            self.location[num] = self.values.length;
+            // push first because 0 is standard value in mapping therefore location 1 refers to the first entry of items
+            self.items.push(num);
+            self.location[num] = self.items.length;
             return true;
         }
         return false;
@@ -130,19 +133,19 @@ library Sets {
         => If item is in i.e self.location[num] != 0
 
             ensure: location[item] is self to 0
-            ensure: values.length reduces by one
-            ensure: num no longer appears in values
+            ensure: items.length reduces by one
+            ensure: num no longer appears in items
 
 
-            => If the item was the last element of values
+            => If the item was the last element of items
             ensure: every other location[x] remains unchanged
-            ensure: \old(values) is the same as values bar the last element
+            ensure: \old(items) is the same as items bar the last element
 
             => If it wasnt
-            ensure: \old(values) is the same as values bar the removed element, except the last item has moved to where the removed item used to be
+            ensure: \old(items) is the same as items bar the removed element, except the last item has moved to where the removed item used to be
                 all except at the removal index remain unchanged
-                at the removal index the new value is now the old end of values
-            ensure: every other location[x] remains unchanged except possibly the one of the last element, which is changd to the index + 1 where the removed value was in values
+                at the removal index the new value is now the old end of items
+            ensure: every other location[x] remains unchanged except possibly the one of the last element, which is changd to the index + 1 where the removed value was in items
                 all locations except at index num and last are unchanged
                 at index last the new value is where num used to be
 
@@ -150,76 +153,76 @@ library Sets {
 
         => If item isnt in i.e self.location[num] == 0
 
-        ensure: values.length doesnt change
-        ensure: values stays identical
+        ensure: items.length doesnt change
+        ensure: items stays identical
         ensure:: location stays identical
 
     */
 
-    /// @notice precondition forall (%TYPE% i) forall (uint j) !(self.location[i] == 0) || !(0 <= j && j < self.values.length) || (self.values[j] != i)
-    /// @notice postcondition forall (%TYPE% i) forall (uint j) !(self.location[i] == 0) || !(0 <= j && j < self.values.length) || (self.values[j] != i)
-    /// @notice precondition forall (uint i) !(0 <= i && i < self.values.length) || (self.location[self.values[i]] - 1 == i)
-    /// @notice postcondition forall (uint i) !(0 <= i && i < self.values.length) || (self.location[self.values[i]] - 1 == i)
-    /// @notice precondition forall (%TYPE% i) !(self.location[i] != 0) || (self.location[i] - 1 < self.values.length) && (self.values[self.location[i] - 1] == i)
-    /// @notice postcondition forall (%TYPE% i) !(self.location[i] != 0) || (self.location[i] - 1 < self.values.length) && (self.values[self.location[i] - 1] == i)
-    /// @notice modifies self.values if success
+    /// @notice precondition forall (%TYPE% i) forall (uint j) !(self.location[i] == 0) || !(0 <= j && j < self.items.length) || (self.items[j] != i)
+    /// @notice postcondition forall (%TYPE% i) forall (uint j) !(self.location[i] == 0) || !(0 <= j && j < self.items.length) || (self.items[j] != i)
+    /// @notice precondition forall (uint i) !(0 <= i && i < self.items.length) || (self.location[self.items[i]] - 1 == i)
+    /// @notice postcondition forall (uint i) !(0 <= i && i < self.items.length) || (self.location[self.items[i]] - 1 == i)
+    /// @notice precondition forall (%TYPE% i) !(self.location[i] != 0) || (self.location[i] - 1 < self.items.length) && (self.items[self.location[i] - 1] == i)
+    /// @notice postcondition forall (%TYPE% i) !(self.location[i] != 0) || (self.location[i] - 1 < self.items.length) && (self.items[self.location[i] - 1] == i)
+    /// @notice modifies self.items if success
     /// @notice modifies self.location if success
-    /// @notice postcondition !success || (__verifier_old_uint(self.location[num]) != 0 && __verifier_old_uint(self.values.length) != 0)
-    /// @notice postcondition success || (__verifier_old_uint(self.location[num]) == 0 || __verifier_old_uint(self.values.length) == 0)
-    /// @notice postcondition success || self.values.length == __verifier_old_uint(self.values.length)
-    /// @notice postcondition forall (uint i) success || !(0 <= i && i < self.values.length) || (self.values[i] == __verifier_old_%TYPE%(self.values[i]))
+    /// @notice postcondition !success || (__verifier_old_uint(self.location[num]) != 0 && __verifier_old_uint(self.items.length) != 0)
+    /// @notice postcondition success || (__verifier_old_uint(self.location[num]) == 0 || __verifier_old_uint(self.items.length) == 0)
+    /// @notice postcondition success || self.items.length == __verifier_old_uint(self.items.length)
+    /// @notice postcondition forall (uint i) success || !(0 <= i && i < self.items.length) || (self.items[i] == __verifier_old_%TYPE%(self.items[i]))
     /// @notice postcondition forall (%TYPE% i) success || self.location[i] == __verifier_old_uint(self.location[i])
-    /// @notice postcondition !success || self.values.length == __verifier_old_uint(self.values.length) - 1
+    /// @notice postcondition !success || self.items.length == __verifier_old_uint(self.items.length) - 1
     /// @notice postcondition !success || self.location[num] == 0
-    /// @notice postcondition forall (uint i) (!success) || !(0 <= i && i < self.values.length) || self.values[i] != num
-    /// @notice postcondition forall (%TYPE% i) (!success) || !(num == __verifier_old_%TYPE%(self.values[self.values.length - 1])) || !(i != num) || self.location[i] == __verifier_old_uint(self.location[i])
-    /// @notice postcondition forall (uint i) (!success) || !(num == __verifier_old_%TYPE%(self.values[self.values.length - 1])) || !(0 <= i && i < self.values.length) || (self.values[i] == __verifier_old_%TYPE%(self.values[i]))
-    /// @notice postcondition forall (uint i) (!success) || (num == __verifier_old_%TYPE%(self.values[self.values.length - 1])) || !(0 <= i && i < self.values.length && i != __verifier_old_uint(self.location[num] - 1)) || (self.values[i] == __verifier_old_%TYPE%(self.values[i]))
-    /// @notice postcondition (!success) || (num == __verifier_old_%TYPE%(self.values[self.values.length - 1])) || self.values[__verifier_old_uint(self.location[num] - 1)] == __verifier_old_%TYPE%(self.values[self.values.length - 1])
-    /// @notice postcondition (!success) || (num == __verifier_old_%TYPE%(self.values[self.values.length - 1])) || self.location[__verifier_old_%TYPE%(self.values[self.values.length - 1])] == __verifier_old_uint(self.location[num])
-    /// @notice postcondition forall (%TYPE% i) (!success) || (num == __verifier_old_%TYPE%(self.values[self.values.length - 1])) || !(i != __verifier_old_%TYPE%(self.values[self.values.length - 1]) && i != num) || (self.location[i] == __verifier_old_uint(self.location[i]))
+    /// @notice postcondition forall (uint i) (!success) || !(0 <= i && i < self.items.length) || self.items[i] != num
+    /// @notice postcondition forall (%TYPE% i) (!success) || !(num == __verifier_old_%TYPE%(self.items[self.items.length - 1])) || !(i != num) || self.location[i] == __verifier_old_uint(self.location[i])
+    /// @notice postcondition forall (uint i) (!success) || !(num == __verifier_old_%TYPE%(self.items[self.items.length - 1])) || !(0 <= i && i < self.items.length) || (self.items[i] == __verifier_old_%TYPE%(self.items[i]))
+    /// @notice postcondition forall (uint i) (!success) || (num == __verifier_old_%TYPE%(self.items[self.items.length - 1])) || !(0 <= i && i < self.items.length && i != __verifier_old_uint(self.location[num] - 1)) || (self.items[i] == __verifier_old_%TYPE%(self.items[i]))
+    /// @notice postcondition (!success) || (num == __verifier_old_%TYPE%(self.items[self.items.length - 1])) || self.items[__verifier_old_uint(self.location[num] - 1)] == __verifier_old_%TYPE%(self.items[self.items.length - 1])
+    /// @notice postcondition (!success) || (num == __verifier_old_%TYPE%(self.items[self.items.length - 1])) || self.location[__verifier_old_%TYPE%(self.items[self.items.length - 1])] == __verifier_old_uint(self.location[num])
+    /// @notice postcondition forall (%TYPE% i) (!success) || (num == __verifier_old_%TYPE%(self.items[self.items.length - 1])) || !(i != __verifier_old_%TYPE%(self.items[self.items.length - 1]) && i != num) || (self.location[i] == __verifier_old_uint(self.location[i]))
 
     function remove(Set storage self, %TYPE% num) public returns (bool success) {
         if (self.location[num] == 0) return false;
-        if (self.values.length == 0) return false;
+        if (self.items.length == 0) return false;
         
         uint index = self.location[num] - 1;
-        %TYPE% last = self.values[self.values.length - 1];
+        %TYPE% last = self.items[self.items.length - 1];
 
         self.location[last] = index + 1;
-        self.values[index] = last;
+        self.items[index] = last;
 
         delete self.location[num];
 
-        self.values.pop(); 
+        self.items.pop(); 
         return true;
     } 
 
-    /// @notice precondition forall (%TYPE% i) forall (uint j) !(self.location[i] == 0) || !(0 <= j && j < self.values.length) || (self.values[j] != i)
-    /// @notice postcondition forall (%TYPE% i) forall (uint j) !(self.location[i] == 0) || !(0 <= j && j < self.values.length) || (self.values[j] != i)
-    /// @notice precondition forall (uint i) !(0 <= i && i < self.values.length) || (self.location[self.values[i]] - 1 == i)
-    /// @notice postcondition forall (uint i) !(0 <= i && i < self.values.length) || (self.location[self.values[i]] - 1 == i)   
-    /// @notice precondition forall (%TYPE% i) !(self.location[i] != 0) || (self.location[i] - 1 < self.values.length) && (self.values[self.location[i] - 1] == i)
-    /// @notice postcondition forall (%TYPE% i) !(self.location[i] != 0) || (self.location[i] - 1 < self.values.length) && (self.values[self.location[i] - 1] == i)
-    /// @notice postcondition !out || self.values.length == 0
-    /// @notice postcondition out || self.values.length > 0
+    /// @notice precondition forall (%TYPE% i) forall (uint j) !(self.location[i] == 0) || !(0 <= j && j < self.items.length) || (self.items[j] != i)
+    /// @notice postcondition forall (%TYPE% i) forall (uint j) !(self.location[i] == 0) || !(0 <= j && j < self.items.length) || (self.items[j] != i)
+    /// @notice precondition forall (uint i) !(0 <= i && i < self.items.length) || (self.location[self.items[i]] - 1 == i)
+    /// @notice postcondition forall (uint i) !(0 <= i && i < self.items.length) || (self.location[self.items[i]] - 1 == i)   
+    /// @notice precondition forall (%TYPE% i) !(self.location[i] != 0) || (self.location[i] - 1 < self.items.length) && (self.items[self.location[i] - 1] == i)
+    /// @notice postcondition forall (%TYPE% i) !(self.location[i] != 0) || (self.location[i] - 1 < self.items.length) && (self.items[self.location[i] - 1] == i)
+    /// @notice postcondition !out || self.items.length == 0
+    /// @notice postcondition out || self.items.length > 0
 
     function isEmpty(Set storage self) public view returns (bool out) {
-        out = self.values.length == 0;
+        out = self.items.length == 0;
     }
 
-    /// @notice precondition forall (%TYPE% i) forall (uint j) !(self.location[i] == 0) || !(0 <= j && j < self.values.length) || (self.values[j] != i)
-    /// @notice postcondition forall (%TYPE% i) forall (uint j) !(self.location[i] == 0) || !(0 <= j && j < self.values.length) || (self.values[j] != i)
-    /// @notice precondition forall (uint i) !(0 <= i && i < self.values.length) || (self.location[self.values[i]] - 1 == i)
-    /// @notice postcondition forall (uint i) !(0 <= i && i < self.values.length) || (self.location[self.values[i]] - 1 == i)
-    /// @notice precondition forall (%TYPE% i) !(self.location[i] != 0) || (self.location[i] - 1 < self.values.length) && (self.values[self.location[i] - 1] == i)
-    /// @notice postcondition forall (%TYPE% i) !(self.location[i] != 0) || (self.location[i] - 1 < self.values.length) && (self.values[self.location[i] - 1] == i)
-    /// @notice postcondition ret == self.values[index]
+    /// @notice precondition forall (%TYPE% i) forall (uint j) !(self.location[i] == 0) || !(0 <= j && j < self.items.length) || (self.items[j] != i)
+    /// @notice postcondition forall (%TYPE% i) forall (uint j) !(self.location[i] == 0) || !(0 <= j && j < self.items.length) || (self.items[j] != i)
+    /// @notice precondition forall (uint i) !(0 <= i && i < self.items.length) || (self.location[self.items[i]] - 1 == i)
+    /// @notice postcondition forall (uint i) !(0 <= i && i < self.items.length) || (self.location[self.items[i]] - 1 == i)
+    /// @notice precondition forall (%TYPE% i) !(self.location[i] != 0) || (self.location[i] - 1 < self.items.length) && (self.items[self.location[i] - 1] == i)
+    /// @notice postcondition forall (%TYPE% i) !(self.location[i] != 0) || (self.location[i] - 1 < self.items.length) && (self.items[self.location[i] - 1] == i)
+    /// @notice postcondition ret == self.items[index]
 
     function get(Set storage self, uint index) public view returns (%TYPE% ret) {
-        require(index < self.values.length);
+        require(index < self.items.length);
         require(index >= 0);
 
-        ret = self.values[index];
+        ret = self.items[index];
     }
 }
