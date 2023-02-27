@@ -19,7 +19,6 @@ library Lists {
         X ensures: The Length of the self.items is the old length + 1 
     */
 
-    /// @notice modifies self.items
     /// @notice postcondition forall (uint i) !(0 <= i && i < self.items.length - 1) || (self.items[i] == __verifier_old_%TYPE%(self.items[i]))
     /// @notice postcondition self.items[self.items.length - 1] == num 
     /// @notice postcondition self.items.length == __verifier_old_uint(self.items.length) + 1
@@ -69,7 +68,6 @@ library Lists {
     /// @notice postcondition forall (uint i) !(i >= 0 && i < index) || (self.items[i] == __verifier_old_%TYPE%(self.items[i]))
     /// @notice postcondition forall (uint i) !(i >= index && i < self.items.length) || (self.items[i] == __verifier_old_%TYPE%(self.items[i + 1]))
     /// @notice postcondition ret == __verifier_old_%TYPE%(self.items[index])
-    /// @notice modifies self.items
 
     function remove(List storage self, uint index) public returns (%TYPE% ret) {
 
@@ -97,12 +95,10 @@ library Lists {
         iterate on found delete and shift and return
         Incase of deletion every other element can still be found just  moved
 
-        ensures: success => modifies self.items
         ensures: success => length is reduced by one
         ensures !success => length is the same aas before
     */
 
-    /// @notice modifies self.items if (success)
     /// @notice postcondition !(success) || self.items.length == __verifier_old_uint(self.items.length) - 1
     /// @notice postcondition forall (uint i) !(success) || !(i >= 0 && i < outIndex) || (self.items[i] == __verifier_old_%TYPE%(self.items[i]))
     /// @notice postcondition forall (uint i) !(success) || !(i >= outIndex && i < self.items.length) || (self.items[i] == __verifier_old_%TYPE%(self.items[i + 1]))

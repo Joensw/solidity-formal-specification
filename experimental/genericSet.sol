@@ -105,8 +105,6 @@ library Sets {
     /// @notice postcondition forall (uint i) !(0 <= i && i < self.items.length) || (self.location[self.items[i]] - 1 == i)
     /// @notice precondition forall (%TYPE% i) !(self.location[i] != 0) || (self.location[i] - 1 < self.items.length) && (self.items[self.location[i] - 1] == i)
     /// @notice postcondition forall (%TYPE% i) !(self.location[i] != 0) || (self.location[i] - 1 < self.items.length) && (self.items[self.location[i] - 1] == i)
-    /// @notice modifies self.location[num] if self.location[num] == 0
-    /// @notice modifies self.items if self.location[num] == 0
     /// @notice postcondition __verifier_old_uint(self.location[num]) != 0 || self.items[self.items.length - 1] == num
     /// @notice postcondition __verifier_old_uint(self.location[num]) != 0 || self.location[num] == self.items.length
     /// @notice postcondition __verifier_old_uint(self.location[num]) != 0 || self.items.length == __verifier_old_uint(self.items.length) +1
@@ -165,8 +163,6 @@ library Sets {
     /// @notice postcondition forall (uint i) !(0 <= i && i < self.items.length) || (self.location[self.items[i]] - 1 == i)
     /// @notice precondition forall (%TYPE% i) !(self.location[i] != 0) || (self.location[i] - 1 < self.items.length) && (self.items[self.location[i] - 1] == i)
     /// @notice postcondition forall (%TYPE% i) !(self.location[i] != 0) || (self.location[i] - 1 < self.items.length) && (self.items[self.location[i] - 1] == i)
-    /// @notice modifies self.items if success
-    /// @notice modifies self.location if success
     /// @notice postcondition !success || (__verifier_old_uint(self.location[num]) != 0 && __verifier_old_uint(self.items.length) != 0)
     /// @notice postcondition success || (__verifier_old_uint(self.location[num]) == 0 || __verifier_old_uint(self.items.length) == 0)
     /// @notice postcondition success || self.items.length == __verifier_old_uint(self.items.length)
