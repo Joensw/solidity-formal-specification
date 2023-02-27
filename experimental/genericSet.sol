@@ -15,7 +15,8 @@ library SetIterator {
     }
 
     /// @notice postcondition self.index == 0
-    /// @notice postcondition forall (uint i) !(0 <= i && i < self.items) || self.items[i] == set.items
+    /// @notice postcondition self.items.length == set.items.length
+    /// @notice postcondition forall (uint i) !(0 <= i && i < self.items.length) || self.items[i] == set.items[i]
 
     function init(Iterator storage self, Sets.Set storage set) public {
         self.items = set.items;

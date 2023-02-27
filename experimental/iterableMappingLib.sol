@@ -19,6 +19,10 @@ library IterableMappingIterator {
         return self.items;
     }
 
+    /// @notice postcondition self.index == 0
+    /// @notice postcondition self.items.length == itmap.keys.length
+    /// @notice postcondition forall (uint i) !(0 <= i && i < self.items.length) || self.items[i] == itmap.keys[i]
+
     function init(Iterator storage self, IterableMappings.IterableMapping storage itmap) public {
         self.items = itmap.keys;
         self.index = 0;
@@ -42,6 +46,9 @@ library IterableMappingIterator {
 }
 
 library IterableMappings {
+    
+    // Should be 0 for uint/int, false for bool and 0x0000000000000000000000000000000000000000 for address
+    uint private constant defaultValue = 0;
 
     struct IterableMapping {
         address[] keys;
