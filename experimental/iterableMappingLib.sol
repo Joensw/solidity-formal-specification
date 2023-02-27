@@ -74,19 +74,6 @@ library IterableMappings {
     /// @notice postcondition forall (uint i) !(0 <= i && i < self.keys.length) || (self.indexOf[self.keys[i]] - 1 == i)
     /// @notice precondition forall (address a) !(self.indexOf[a] == 0) || (self.values[a] == 0)
     /// @notice postcondition forall (address a) !(self.indexOf[a] == 0) || (self.values[a] == 0)
-    /// @notice postcondition value == self.values[self.keys[_index]]
-
-    function getIndex(IterableMapping storage self ,uint _index) public view returns (uint value) {
-        require(_index < self.keys.length);
-        return self.values[self.keys[_index]];
-    }
-
-    /// @notice precondition forall (address a) !(self.indexOf[a] != 0) || (self.indexOf[a] - 1 < self.keys.length) && (self.keys[self.indexOf[a] - 1] == a)
-    /// @notice postcondition forall (address a) !(self.indexOf[a] != 0) || (self.indexOf[a] - 1 < self.keys.length) && (self.keys[self.indexOf[a] - 1] == a)
-    /// @notice precondition forall (uint i) !(0 <= i && i < self.keys.length) || (self.indexOf[self.keys[i]] - 1 == i)
-    /// @notice postcondition forall (uint i) !(0 <= i && i < self.keys.length) || (self.indexOf[self.keys[i]] - 1 == i)
-    /// @notice precondition forall (address a) !(self.indexOf[a] == 0) || (self.values[a] == 0)
-    /// @notice postcondition forall (address a) !(self.indexOf[a] == 0) || (self.values[a] == 0)
     /// @notice postcondition out == self.keys.length
 
     function size(IterableMapping storage self) public view returns (uint out) {

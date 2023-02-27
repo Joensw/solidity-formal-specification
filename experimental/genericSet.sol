@@ -210,19 +210,4 @@ library Sets {
     function isEmpty(Set storage self) public view returns (bool out) {
         out = self.items.length == 0;
     }
-
-    /// @notice precondition forall (%TYPE% i) forall (uint j) !(self.location[i] == 0) || !(0 <= j && j < self.items.length) || (self.items[j] != i)
-    /// @notice postcondition forall (%TYPE% i) forall (uint j) !(self.location[i] == 0) || !(0 <= j && j < self.items.length) || (self.items[j] != i)
-    /// @notice precondition forall (uint i) !(0 <= i && i < self.items.length) || (self.location[self.items[i]] - 1 == i)
-    /// @notice postcondition forall (uint i) !(0 <= i && i < self.items.length) || (self.location[self.items[i]] - 1 == i)
-    /// @notice precondition forall (%TYPE% i) !(self.location[i] != 0) || (self.location[i] - 1 < self.items.length) && (self.items[self.location[i] - 1] == i)
-    /// @notice postcondition forall (%TYPE% i) !(self.location[i] != 0) || (self.location[i] - 1 < self.items.length) && (self.items[self.location[i] - 1] == i)
-    /// @notice postcondition ret == self.items[index]
-
-    function get(Set storage self, uint index) public view returns (%TYPE% ret) {
-        require(index < self.items.length);
-        require(index >= 0);
-
-        ret = self.items[index];
-    }
 }
