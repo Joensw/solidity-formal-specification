@@ -9,7 +9,7 @@ This repository is an ongoing WIP as part of my thesis.
 ## Simple list
   - [x] implementation
   - [x] specification (solc-verify)
-  - [x] verified (strangely the contains function for bool lists cannot be verified )
+  - [~] verified (strangely for bool lists the contains method cannot be verified with the current specification)
    
 ## Set
   - [x] implementation
@@ -20,7 +20,7 @@ This repository is an ongoing WIP as part of my thesis.
 ## Iterable Mapping
   - [x] implementation
   - [x] specification (solc-verify)
-  - [x] verified
+  - [~] verified (using address as the value for the mapping causes issues with the remove method verification, all other key/value type combinations are verifiable)
 
 ## Strict Mapping
   - [x] implementation
