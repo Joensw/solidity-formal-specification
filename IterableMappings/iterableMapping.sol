@@ -56,12 +56,6 @@ library IterableMappings {
         mapping (%TYPE_KEY% => uint) indexOf;
     }
 
-    // For testing purposes, can be ignored
-
-    function get(IterableMapping storage self) public view returns (%TYPE_KEY%[] memory) {
-        return self.keys;
-    }
-
     /// @notice precondition forall (%TYPE_KEY% a) !(self.indexOf[a] != 0) || (self.indexOf[a] - 1 < self.keys.length) && (self.keys[self.indexOf[a] - 1] == a)
     /// @notice postcondition forall (%TYPE_KEY% a) !(self.indexOf[a] != 0) || (self.indexOf[a] - 1 < self.keys.length) && (self.keys[self.indexOf[a] - 1] == a)
     /// @notice precondition forall (uint i) !(0 <= i && i < self.keys.length) || (self.indexOf[self.keys[i]] - 1 == i)
@@ -125,41 +119,6 @@ library IterableMappings {
         }
     }
 
-    /*
-
-        ensures: success <=> (__verifier_old_uint(self.keys.length) != 0 && __verifier_old_uint(self.indexOf[_key]) != 0)
-            =>
-            <=
-
-        ensures: success => self.keys.length == __verifier_old_uint(self.keys.length) - 1
-        ensures: !success => self.keys.length == __verifier_old_uint(self.keys.length)
-
-        ensures !success => all data strucutres remain unchanged
-            keys
-            values
-            indexOf
-
-        ensures success =>
-            values _key is now 0 && indexof _key is now 0
-            all entries in keys are != _key, i.e _key doesnt appear in _keys anymore
-            values stays the same except for _key 
-
-        ensures: success & last => 
-            keys before is the same as keys after just one shorter
-            indexOf stays the same except for _key
-
-        ensures: success & !last => 
-            The old last element is now at the index where _key was
-                in keys
-                in indexOF
-            everything else stays the same
-                in keys (except ofcourse the last element is cut)
-                in indexOF
-
-
-    
-    */
-
     /// @notice precondition forall (%TYPE_KEY% a) !(self.indexOf[a] != 0) || (self.indexOf[a] - 1 < self.keys.length) && (self.keys[self.indexOf[a] - 1] == a)
     /// @notice postcondition forall (%TYPE_KEY% a) !(self.indexOf[a] != 0) || (self.indexOf[a] - 1 < self.keys.length) && (self.keys[self.indexOf[a] - 1] == a)
     /// @notice precondition forall (uint i) !(0 <= i && i < self.keys.length) || (self.indexOf[self.keys[i]] - 1 == i)
@@ -187,7 +146,6 @@ library IterableMappings {
         if (self.keys.length == 0) return false;
         if (self.indexOf[_key] == 0) return false;
     
-
         // move last elemet of keys array to where the element we want to remove was
         uint index = self.indexOf[_key] - 1;
         %TYPE_KEY% lastKey = self.keys[self.keys.length - 1];

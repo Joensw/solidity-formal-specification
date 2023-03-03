@@ -7,12 +7,6 @@ library SetIterator {
         uint index;
         %TYPE%[] items;
     }
- 
-    // For testing purposes, can be ignored
-
-    function get(Iterator storage self) public view returns (%TYPE%[] memory) {
-        return self.items;
-    }
 
     /// @notice postcondition self.index == 0
     /// @notice postcondition self.items.length == set.items.length
@@ -82,24 +76,6 @@ library Sets {
         return self.location[num] != 0;
     }
 
-
-    /*
-        => If item is in i.e self.location[num] != 0
-        ensures: items length is the same
-        ensures: the items in items stay the same
-        ensures: the location mapping is identical to before
-
-
-
-        => If item isnt in i.e self.location[num] == 0
-        ensures: the item can now be found at the end of items
-        ensures: items length has increase by 1
-        ensures: the other items in items hasn't been altered
-        ensures: the location mapping hasnt been altered except at 'num'
-
-        => else:
-        success == true <=> self.lcoation[num] != 0
-    */
     /// @notice precondition forall (%TYPE% i) forall (uint j) !(self.location[i] == 0) || !(0 <= j && j < self.items.length) || (self.items[j] != i)
     /// @notice postcondition forall (%TYPE% i) forall (uint j) !(self.location[i] == 0) || !(0 <= j && j < self.items.length) || (self.items[j] != i)
     /// @notice precondition forall (uint i) !(0 <= i && i < self.items.length) || (self.location[self.items[i]] - 1 == i)
@@ -125,38 +101,6 @@ library Sets {
         }
         return false;
     }
-
-    /*
-        requires: Nothing, however we have 1 precondition because the prover needs them for the current state of the implementation it will be factored to a invariant later
-
-        => If item is in i.e self.location[num] != 0
-
-            ensure: location[item] is self to 0
-            ensure: items.length reduces by one
-            ensure: num no longer appears in items
-
-
-            => If the item was the last element of items
-            ensure: every other location[x] remains unchanged
-            ensure: \old(items) is the same as items bar the last element
-
-            => If it wasnt
-            ensure: \old(items) is the same as items bar the removed element, except the last item has moved to where the removed item used to be
-                all except at the removal index remain unchanged
-                at the removal index the new value is now the old end of items
-            ensure: every other location[x] remains unchanged except possibly the one of the last element, which is changd to the index + 1 where the removed value was in items
-                all locations except at index num and last are unchanged
-                at index last the new value is where num used to be
-
-
-
-        => If item isnt in i.e self.location[num] == 0
-
-        ensure: items.length doesnt change
-        ensure: items stays identical
-        ensure:: location stays identical
-
-    */
 
     /// @notice precondition forall (%TYPE% i) forall (uint j) !(self.location[i] == 0) || !(0 <= j && j < self.items.length) || (self.items[j] != i)
     /// @notice postcondition forall (%TYPE% i) forall (uint j) !(self.location[i] == 0) || !(0 <= j && j < self.items.length) || (self.items[j] != i)
