@@ -2,7 +2,10 @@ import sys
 
 def replace(fileName, keyword_1: str, replacement_1: str, keyword_2 : str = "", replacement_2 : str = ""):
     fIn = open(fileName, "rt")
-    fOut = open(f"{replacement_1}L{replacement_2}_" + fileName, "wt")
+    newFileTitle = f"{replacement_1}_" + fileName;
+    if replacement_2 != "":
+        newFileTitle = f"{replacement_1}-{replacement_2}_" + fileName;
+    fOut = open(newFileTitle, "wt")
     for line in fIn:
         fOut.write(line.replace(keyword_1, replacement_1).replace(keyword_2, replacement_2))
     fIn.close()

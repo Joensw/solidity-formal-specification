@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.7.0;
 
-import "./address_genericSet.sol";
+import "../Sets/address_set.sol";
 
 contract ExampleUsage {
 

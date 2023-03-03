@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.7.0;
 
-import "./../callerAddressableMapping.sol";
+import "../CallerAddressableMappings/uint_callerAddressableMapping.sol";
 
 contract ExampleUsage {
 

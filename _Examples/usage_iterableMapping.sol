@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.7.0;
 
-import "./iterableMappingLib.sol";
+import "../IterableMappings/address-uint_iterableMapping.sol";
 
 contract ExampleUsage {
 
