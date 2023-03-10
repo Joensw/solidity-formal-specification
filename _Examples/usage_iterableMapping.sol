@@ -9,7 +9,7 @@ contract ExampleUsage {
     using IterableMappingIterator for IterableMappingIterator.Iterator;
 
     IterableMappings.IterableMapping private balances;
-    IterableMappingIterator.Iterator private it;
+    IterableMappingIterator.Iterator private accountIterator;
 
     constructor() {
         balances.set(0x5B38Da6a701c568545dCfcB03FcB875f56beddC4, 50);
@@ -35,9 +35,9 @@ contract ExampleUsage {
     }
 
     function payAll(uint _value) public {
-        it.init(balances);
-        while(it.hasNext()){
-            address currentAccount = it.next();
+        accountIterator.init(balances);
+        while(accountIterator.hasNext()){
+            address currentAccount = accountIterator.next();
             uint currentBalance = balances.get(currentAccount);
             balances.set(currentAccount, currentBalance + _value);
         }

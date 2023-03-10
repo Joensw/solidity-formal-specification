@@ -9,13 +9,13 @@ library CallerAddressableMappings {
 
     /// @notice postcondition contents == self.map[key]
 
-    function get(CallerAddressableMapping storage self, address key) public view returns (uint contents) {
+    function getTarget(CallerAddressableMapping storage self, address key) public view returns (uint contents) {
         contents = self.map[key];
     }
 
     /// @notice postcondition contents == self.map[msg.sender]
 
-    function getSelf(CallerAddressableMapping storage self) public view returns (uint contents) {
+    function get(CallerAddressableMapping storage self) public view returns (uint contents) {
         contents = self.map[msg.sender];
     }
 
@@ -30,7 +30,7 @@ library CallerAddressableMappings {
     /// @notice postcondition self.map[target] == __verifier_old_uint(self.map[target]) + amount
     /// @notice postcondition self.map[target] >= __verifier_old_uint(self.map[target])
 
-    function deposit(CallerAddressableMapping storage self, address target, uint amount) public {
+    function depositTarget(CallerAddressableMapping storage self, address target, uint amount) public {
         require(amount >= 0);
         self.map[target] += amount;
     }
@@ -39,7 +39,7 @@ library CallerAddressableMappings {
     /// @notice postcondition self.map[msg.sender] == __verifier_old_uint(self.map[msg.sender]) + amount
     /// @notice postcondition self.map[msg.sender] >= __verifier_old_uint(self.map[msg.sender])
 
-    function depositSelf(CallerAddressableMapping storage self, uint amount) public {
+    function deposit(CallerAddressableMapping storage self, uint amount) public {
         require(amount >= 0);
         self.map[msg.sender] += amount;
     }

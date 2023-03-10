@@ -9,7 +9,6 @@ contract ExampleUsage {
 
     CallerAddressableMappings.CallerAddressableMapping private balances;
 
-    // The Caller may only see their own entry of the mapping and not that of other caller addresses
     function getBalance() public view returns (uint) {
         return balances.get();
     }

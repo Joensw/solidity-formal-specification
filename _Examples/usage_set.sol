@@ -11,7 +11,7 @@ contract ExampleUsage {
     Sets.Set private admins;
     SetIterator.Iterator private it;
 
-    uint max_admins = 4;
+    uint MAX_ADMINS = 4;
 
     constructor() {
         admins.add(0x5B38Da6a701c568545dCfcB03FcB875f56beddC4);
@@ -32,16 +32,16 @@ contract ExampleUsage {
         return admins.remove(msg.sender);
     }
 
-    function addToAdmins(address adr) public returns (bool) {
+    function addToAdmins(address _adr) public returns (bool) {
         require(admins.contains(msg.sender));
-        require(admins.size() < max_admins);
-        return admins.add(adr);
+        require(admins.size() < MAX_ADMINS);
+        return admins.add(_adr);
     }
 
     function iterate() public {
         while(it.hasNext()){
             address current = it.next();
-            // ...
+            // ... do something with current address
         }
     }
 
