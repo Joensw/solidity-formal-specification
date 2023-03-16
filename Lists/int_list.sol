@@ -128,4 +128,21 @@ library Lists {
 
         ret = self.items[index];
     }
+
+    /// @notice postcondition forall (uint i) !(i >= 0 && i < index) || (self.items[i] == __verifier_old_int(self.items[i]))
+    /// @notice postcondition forall (uint i) !(i > index && i < self.items.length) || (self.items[i] == __verifier_old_int(self.items[i]))
+    /// @notice postcondition self.items[index] == newValue
+
+    function set(List storage self, uint index, int newValue) public {
+        require(index < self.items.length);
+        require(index >= 0);
+
+        self.items[index] = newValue;
+    }
+
+    // @notice postcondition self.items.length == 0
+
+    function clear(List storage self) public {
+        delete self.items;
+    }
 }
