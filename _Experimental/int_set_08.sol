@@ -151,49 +151,49 @@ library Sets {
     }
 }
 
-// contract ExampleUsage {
+contract Test {
 
-//     using Sets for Sets.Set;
-//     using SetIterator for SetIterator.Iterator;
+    using Sets for Sets.Set;
+    using SetIterator for SetIterator.Iterator;
 
-//     Sets.Set mySet;
-//     SetIterator.Iterator myIterator;
+    Sets.Set mySet;
+    SetIterator.Iterator myIterator;
 
-//     int[] public test_array;
+    int[] public test_array;
 
-//     function add(int toAdd) public returns (bool) {
-//         return mySet.add(toAdd);
-//     }
+    function add(int toAdd) public returns (bool) {
+        return mySet.add(toAdd);
+    }
 
-//     function contains(int toAdd) public view returns (bool) {
-//         return mySet.contains(toAdd);
-//     }
-//     function remove(int toAdd) public returns (bool) {
-//         return mySet.remove(toAdd);
-//     }
+    function contains(int toAdd) public view returns (bool) {
+        return mySet.contains(toAdd);
+    }
+    function remove(int toAdd) public returns (bool) {
+        return mySet.remove(toAdd);
+    }
 
-//     function size() public view returns (uint) {
-//         return mySet.size();
-//     }
+    function size() public view returns (uint) {
+        return mySet.size();
+    }
 
-//     function iterate() public returns (uint) {
-//         myIterator = mySet.iterator();
-//         uint max = 10;
-//         uint current = 1;
-//         while (myIterator.hasNext() && current < max) {
-//             int item = myIterator.next();
-//             test_array.push(item);
-//             current++;
-//         }
-//         return current;
-//     }
+    function iterate() public returns (uint) {
+        myIterator = mySet.iterator();
+        uint max = 10;
+        uint current = 1;
+        while (myIterator.hasNext() && current < max) {
+            int item = myIterator.next();
+            test_array.push(item);
+            current++;
+        }
+        return current;
+    }
 
-//     function testIteratorItems() public view returns (int[] memory) {
-//         SetIterator.Iterator memory currentIterator = mySet.iterator();
-//         return currentIterator.items;
-//     }
+    function testIteratorItems() public view returns (int[] memory) {
+        SetIterator.Iterator memory currentIterator = mySet.iterator();
+        return currentIterator.items;
+    }
 
-//     function get() public view returns (int[] memory) {
-//         return test_array;
-//     }
-// }
+    function get() public view returns (int[] memory) {
+        return test_array;
+    }
+}
