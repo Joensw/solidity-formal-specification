@@ -140,7 +140,7 @@ library Lists {
         self.items[index] = newValue;
     }
 
-    // @notice postcondition self.items.length == 0
+    /// @notice postcondition self.items.length == 0
 
     function clear(List storage self) public {
         delete self.items;
