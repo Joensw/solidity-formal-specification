@@ -12,12 +12,6 @@ library IterableMappingIterator {
         uint index;
         bool[] items;
     }
- 
-    // For testing purposes, can be ignored
-
-    function get(Iterator storage self) public view returns (bool[] memory) {
-        return self.items;
-    }
 
     /// @notice postcondition self.index == 0
     /// @notice postcondition self.items.length == itmap.keys.length
