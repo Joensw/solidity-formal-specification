@@ -46,12 +46,6 @@ library Sets {
         mapping (int => uint) location;
     }
 
-    // For testing purposes, can be ignored
-
-    function get(Set storage self) public view returns (int[] memory) {
-        return self.items;
-    }
-
     /// @notice precondition forall (int i) forall (uint j) !(self.location[i] == 0) || !(0 <= j && j < self.items.length) || (self.items[j] != i)
     /// @notice postcondition forall (int i) forall (uint j) !(self.location[i] == 0) || !(0 <= j && j < self.items.length) || (self.items[j] != i)
     /// @notice precondition forall (uint i) !(0 <= i && i < self.items.length) || (self.location[self.items[i]] - 1 == i)
