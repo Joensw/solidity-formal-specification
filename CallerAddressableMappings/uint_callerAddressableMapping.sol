@@ -43,6 +43,4 @@ library CallerAddressableMappings {
         require(amount >= 0);
         self.map[msg.sender] += amount;
     }
-
-
 }

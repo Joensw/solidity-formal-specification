@@ -152,5 +152,4 @@ library IterableMappings {
         self.keys.pop();
         return true;
     }
-
 }
