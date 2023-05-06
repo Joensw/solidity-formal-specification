@@ -1,6 +1,39 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.7.0;
 
+library ListIterator {
+
+    struct Iterator {
+        uint index;
+        address[] items;
+    }
+
+    /// @notice postcondition self.index == 0
+    /// @notice postcondition self.items.length == list.items.length
+    /// @notice postcondition forall (uint i) !(0 <= i && i < self.items.length) || self.items[i] == list.items[i]
+
+    function init(Iterator storage self, Lists.List storage list) public {
+        self.items = list.items;
+        self.index = 0;
+    }
+
+    /// @notice postcondition !ret || self.index < self.items.length
+    /// @notice postcondition ret || self.index >= self.items.length
+
+    function hasNext(Iterator storage self) public view returns (bool ret) {
+        return self.index < self.items.length;
+    }
+
+    /// @notice postcondition item == __verifier_old_address(self.items[self.index])
+    /// @notice postcondition self.index == __verifier_old_uint(self.index) + 1
+    /// @notice postcondition forall (uint i) !(0 <= i && i < self.items.length) || self.items[i] == __verifier_old_address(self.items[i])
+
+    function next(Iterator storage self) public returns (address item) {
+        item = self.items[self.index];
+        self.index++;
+    }
+}
+
 library Lists {
 
     struct List {
@@ -140,7 +173,7 @@ library Lists {
         self.items[index] = newValue;
     }
 
-    // @notice postcondition self.items.length == 0
+    /// @notice postcondition self.items.length == 0
 
     function clear(List storage self) public {
         delete self.items;
