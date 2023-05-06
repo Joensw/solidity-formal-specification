@@ -14,7 +14,8 @@ contract ExampleUsage {
     }
 
     function deposit() public payable {
-        balances.deposit(msg.value);
+        uint currentBalance = balances.get();
+        balances.set(currentBalance + msg.value);
     }
 
     function withdraw(uint amount) public {
@@ -22,5 +23,9 @@ contract ExampleUsage {
         balances.set(balances.get() - amount);
         (bool sent, ) = msg.sender.call{value: amount}("");
         require(sent, "withdraw failed");
+    }
+
+    function send(address target) public payable returns (bool) {
+        return balances.transfer(target, msg.value);
     }
 }
