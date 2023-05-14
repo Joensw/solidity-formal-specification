@@ -128,9 +128,3 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
-
-# Timings
-time_*.txt
-
-# Results
-results_*.txt

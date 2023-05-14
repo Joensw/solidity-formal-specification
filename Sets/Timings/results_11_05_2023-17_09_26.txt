@@ -1,0 +1,44 @@
+___address_set.sol___
+SetIterator::init: OK
+SetIterator::hasNext: OK
+SetIterator::next: OK
+Sets::size: OK
+Sets::contains: OK
+Sets::add: OK
+Sets::remove: OK
+Sets::isEmpty: OK
+No errors found.
+
+___bool_set.sol___
+SetIterator::init: OK
+SetIterator::hasNext: OK
+SetIterator::next: OK
+Sets::size: OK
+Sets::contains: OK
+Sets::add: OK
+Sets::remove: OK
+Sets::isEmpty: OK
+No errors found.
+
+___uint_set.sol___
+SetIterator::init: OK
+SetIterator::hasNext: OK
+SetIterator::next: OK
+Sets::size: OK
+Sets::contains: OK
+Sets::add: OK
+Sets::remove: OK
+Sets::isEmpty: OK
+No errors found.
+
+___int_set.sol___
+SetIterator::init: OK
+SetIterator::hasNext: OK
+SetIterator::next: OK
+Sets::size: OK
+Sets::contains: OK
+Sets::add: OK
+Sets::remove: OK
+Sets::isEmpty: OK
+No errors found.
+

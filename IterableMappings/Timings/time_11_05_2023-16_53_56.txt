@@ -1,0 +1,84 @@
+___uint-int_iterableMapping.sol___
+real 12.35
+user 18.47
+sys 0.84
+
+___address-uint_iterableMapping.sol___
+real 12.17
+user 16.39
+sys 0.68
+
+___int-uint_iterableMapping.sol___
+real 12.32
+user 17.07
+sys 0.67
+
+___int-int_iterableMapping.sol___
+real 12.21
+user 16.63
+sys 0.45
+
+___uint-uint_iterableMapping.sol___
+real 12.07
+user 16.40
+sys 0.58
+
+___address-address_iterableMapping.sol___
+Command exited with non-zero status 249
+real 12.21
+user 15.74
+sys 0.59
+
+___uint-bool_iterableMapping.sol___
+real 12.11
+user 21.22
+sys 0.80
+
+___address-int_iterableMapping.sol___
+real 12.15
+user 16.19
+sys 0.71
+
+___bool-uint_iterableMapping.sol___
+real 12.19
+user 16.76
+sys 0.59
+
+___uint-address_iterableMapping.sol___
+Command exited with non-zero status 249
+real 12.11
+user 15.75
+sys 0.64
+
+___int-bool_iterableMapping.sol___
+real 12.20
+user 21.28
+sys 0.80
+
+___address-bool_iterableMapping.sol___
+real 12.24
+user 21.57
+sys 0.67
+
+___bool-bool_iterableMapping.sol___
+real 12.23
+user 16.50
+sys 0.71
+
+___int-address_iterableMapping.sol___
+Command exited with non-zero status 249
+real 12.16
+user 15.53
+sys 0.68
+
+___bool-address_iterableMapping.sol___
+Command exited with non-zero status 250
+real 12.14
+user 16.57
+sys 0.58
+
+___bool-int_iterableMapping.sol___
+real 12.23
+user 17.01
+sys 0.79
+

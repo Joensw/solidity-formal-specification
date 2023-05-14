@@ -1,0 +1,14 @@
+___int_callerAddressableMapping.sol___
+CallerAddressableMappings::getTarget: OK
+CallerAddressableMappings::get: OK
+CallerAddressableMappings::set: OK
+CallerAddressableMappings::transfer: OK
+No errors found.
+
+___uint_callerAddressableMapping.sol___
+CallerAddressableMappings::getTarget: OK
+CallerAddressableMappings::get: OK
+CallerAddressableMappings::set: OK
+CallerAddressableMappings::transfer: OK
+No errors found.
+

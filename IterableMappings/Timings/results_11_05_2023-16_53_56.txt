@@ -1,0 +1,180 @@
+___uint-int_iterableMapping.sol___
+IterableMappingIterator::init: OK
+IterableMappingIterator::hasNext: OK
+IterableMappingIterator::next: OK
+IterableMappings::get: OK
+IterableMappings::size: OK
+IterableMappings::containsKey: OK
+IterableMappings::set: OK
+IterableMappings::remove: OK
+No errors found.
+
+___address-uint_iterableMapping.sol___
+IterableMappingIterator::init: OK
+IterableMappingIterator::hasNext: OK
+IterableMappingIterator::next: OK
+IterableMappings::get: OK
+IterableMappings::size: OK
+IterableMappings::containsKey: OK
+IterableMappings::set: OK
+IterableMappings::remove: OK
+No errors found.
+
+___int-uint_iterableMapping.sol___
+IterableMappingIterator::init: OK
+IterableMappingIterator::hasNext: OK
+IterableMappingIterator::next: OK
+IterableMappings::get: OK
+IterableMappings::size: OK
+IterableMappings::containsKey: OK
+IterableMappings::set: OK
+IterableMappings::remove: OK
+No errors found.
+
+___int-int_iterableMapping.sol___
+IterableMappingIterator::init: OK
+IterableMappingIterator::hasNext: OK
+IterableMappingIterator::next: OK
+IterableMappings::get: OK
+IterableMappings::size: OK
+IterableMappings::containsKey: OK
+IterableMappings::set: OK
+IterableMappings::remove: OK
+No errors found.
+
+___uint-uint_iterableMapping.sol___
+IterableMappingIterator::init: OK
+IterableMappingIterator::hasNext: OK
+IterableMappingIterator::next: OK
+IterableMappings::get: OK
+IterableMappings::size: OK
+IterableMappings::containsKey: OK
+IterableMappings::set: OK
+IterableMappings::remove: OK
+No errors found.
+
+___address-address_iterableMapping.sol___
+IterableMappingIterator::init: OK
+IterableMappingIterator::hasNext: OK
+IterableMappingIterator::next: OK
+IterableMappings::get: OK
+IterableMappings::size: OK
+IterableMappings::containsKey: OK
+IterableMappings::set: OK
+IterableMappings::remove: TIMEOUT
+Inconclusive results.
+No errors found.
+
+___uint-bool_iterableMapping.sol___
+IterableMappingIterator::init: OK
+IterableMappingIterator::hasNext: OK
+IterableMappingIterator::next: OK
+IterableMappings::get: OK
+IterableMappings::size: OK
+IterableMappings::containsKey: OK
+IterableMappings::set: OK
+IterableMappings::remove: OK
+No errors found.
+
+___address-int_iterableMapping.sol___
+IterableMappingIterator::init: OK
+IterableMappingIterator::hasNext: OK
+IterableMappingIterator::next: OK
+IterableMappings::get: OK
+IterableMappings::size: OK
+IterableMappings::containsKey: OK
+IterableMappings::set: OK
+IterableMappings::remove: OK
+No errors found.
+
+___bool-uint_iterableMapping.sol___
+IterableMappingIterator::init: OK
+IterableMappingIterator::hasNext: OK
+IterableMappingIterator::next: OK
+IterableMappings::get: OK
+IterableMappings::size: OK
+IterableMappings::containsKey: OK
+IterableMappings::set: OK
+IterableMappings::remove: OK
+No errors found.
+
+___uint-address_iterableMapping.sol___
+IterableMappingIterator::init: OK
+IterableMappingIterator::hasNext: OK
+IterableMappingIterator::next: OK
+IterableMappings::get: OK
+IterableMappings::size: OK
+IterableMappings::containsKey: OK
+IterableMappings::set: OK
+IterableMappings::remove: TIMEOUT
+Inconclusive results.
+No errors found.
+
+___int-bool_iterableMapping.sol___
+IterableMappingIterator::init: OK
+IterableMappingIterator::hasNext: OK
+IterableMappingIterator::next: OK
+IterableMappings::get: OK
+IterableMappings::size: OK
+IterableMappings::containsKey: OK
+IterableMappings::set: OK
+IterableMappings::remove: OK
+No errors found.
+
+___address-bool_iterableMapping.sol___
+IterableMappingIterator::init: OK
+IterableMappingIterator::hasNext: OK
+IterableMappingIterator::next: OK
+IterableMappings::get: OK
+IterableMappings::size: OK
+IterableMappings::containsKey: OK
+IterableMappings::set: OK
+IterableMappings::remove: OK
+No errors found.
+
+___bool-bool_iterableMapping.sol___
+IterableMappingIterator::init: OK
+IterableMappingIterator::hasNext: OK
+IterableMappingIterator::next: OK
+IterableMappings::get: OK
+IterableMappings::size: OK
+IterableMappings::containsKey: OK
+IterableMappings::set: OK
+IterableMappings::remove: OK
+No errors found.
+
+___int-address_iterableMapping.sol___
+IterableMappingIterator::init: OK
+IterableMappingIterator::hasNext: OK
+IterableMappingIterator::next: OK
+IterableMappings::get: OK
+IterableMappings::size: OK
+IterableMappings::containsKey: OK
+IterableMappings::set: OK
+IterableMappings::remove: TIMEOUT
+Inconclusive results.
+No errors found.
+
+___bool-address_iterableMapping.sol___
+IterableMappingIterator::init: OK
+IterableMappingIterator::hasNext: OK
+IterableMappingIterator::next: OK
+IterableMappings::get: OK
+IterableMappings::size: OK
+IterableMappings::containsKey: OK
+IterableMappings::set: OK
+IterableMappings::remove: ERROR
+ - bool-address_iterableMapping.sol:141:5: Postcondition 'forall (bool a) !(self.indexOf[a] == 0) || (self.values[a] == defaultValue)' might not hold at end of function.
+Errors were found by the verifier.
+
+___bool-int_iterableMapping.sol___
+IterableMappingIterator::init: OK
+IterableMappingIterator::hasNext: OK
+IterableMappingIterator::next: OK
+IterableMappings::get: OK
+IterableMappings::size: OK
+IterableMappings::containsKey: OK
+IterableMappings::set: OK
+IterableMappings::remove: OK
+No errors found.
+

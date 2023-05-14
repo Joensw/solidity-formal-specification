@@ -1,0 +1,21 @@
+___address_list.sol___
+real 11.40
+user 29.39
+sys 1.07
+
+___bool_list.sol___
+Command exited with non-zero status 250
+real 11.31
+user 28.79
+sys 1.01
+
+___int_list.sol___
+real 11.30
+user 28.52
+sys 0.95
+
+___uint_list.sol___
+real 11.32
+user 28.21
+sys 1.00
+

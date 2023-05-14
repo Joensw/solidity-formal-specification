@@ -1,0 +1,67 @@
+___address_list.sol___
+ListIterator::init: OK
+ListIterator::hasNext: OK
+ListIterator::next: OK
+Lists::add: OK
+Lists::size: OK
+Lists::contains: OK
+Lists::remove: OK
+Lists::removeObject: OK
+Lists::indexOf: OK
+Lists::isEmpty: OK
+Lists::get: OK
+Lists::set: OK
+Lists::clear: OK
+No errors found.
+
+___bool_list.sol___
+ListIterator::init: OK
+ListIterator::hasNext: OK
+ListIterator::next: OK
+Lists::add: OK
+Lists::size: OK
+Lists::contains: ERROR
+ - bool_list.sol:61:5: Postcondition 'exists (uint i) (!isContained || (0 <= i && i < self.items.length && self.items[i] == num))' might not hold at end of function.
+Lists::remove: OK
+Lists::removeObject: ERROR
+ - bool_list.sol:108:5: Postcondition 'exists (uint i) !(success) || (i >= 0 && i < __verifier_old_uint(self.items.length) && __verifier_old_bool(self.items[i]) == val) ' might not hold at end of function.
+Lists::indexOf: ERROR
+ - bool_list.sol:139:5: Postcondition 'exists (uint i) !(valid) || (i >= 0 && i < __verifier_old_uint(self.items.length) && __verifier_old_bool(self.items[i]) == val)  ' might not hold at end of function.
+Lists::isEmpty: OK
+Lists::get: OK
+Lists::set: OK
+Lists::clear: OK
+Errors were found by the verifier.
+
+___int_list.sol___
+ListIterator::init: OK
+ListIterator::hasNext: OK
+ListIterator::next: OK
+Lists::add: OK
+Lists::size: OK
+Lists::contains: OK
+Lists::remove: OK
+Lists::removeObject: OK
+Lists::indexOf: OK
+Lists::isEmpty: OK
+Lists::get: OK
+Lists::set: OK
+Lists::clear: OK
+No errors found.
+
+___uint_list.sol___
+ListIterator::init: OK
+ListIterator::hasNext: OK
+ListIterator::next: OK
+Lists::add: OK
+Lists::size: OK
+Lists::contains: OK
+Lists::remove: OK
+Lists::removeObject: OK
+Lists::indexOf: OK
+Lists::isEmpty: OK
+Lists::get: OK
+Lists::set: OK
+Lists::clear: OK
+No errors found.
+
