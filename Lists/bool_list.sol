@@ -55,7 +55,7 @@ library Lists {
     }
 
     /// @notice postcondition exists (uint i) (!isContained || (0 <= i && i < self.items.length && self.items[i] == num))
-    /// @notice postcondition forall (uint i) (isContained || !(0 <= i && i < self.items.length) || self.items[i] != num)
+    /// @notice postcondition forall (uint i) (isContained || !(0 <= i && i < self.items.length && self.items[i] == num))
     /// @notice postcondition forall (uint i) !(0 <= i && i < self.items.length) || (self.items[i] == __verifier_old_bool(self.items[i]))
 
     function contains(List storage self, bool num) public view returns (bool isContained) {
@@ -98,6 +98,8 @@ library Lists {
         self.items.pop();
     }
 
+    /// @notice postcondition exists (uint i) !(success) || (i >= 0 && i < __verifier_old_uint(self.items.length) && __verifier_old_bool(self.items[i]) == val) 
+    /// @notice postcondition forall (uint i) !(i >= 0 && i < __verifier_old_uint(self.items.length) && __verifier_old_bool(self.items[i]) == val) || (success)
     /// @notice postcondition !(success) || self.items.length == __verifier_old_uint(self.items.length) - 1
     /// @notice postcondition forall (uint i) !(success) || !(i >= 0 && i < outIndex) || (self.items[i] == __verifier_old_bool(self.items[i]))
     /// @notice postcondition forall (uint i) !(success) || !(i >= outIndex && i < self.items.length) || (self.items[i] == __verifier_old_bool(self.items[i + 1]))
@@ -108,7 +110,7 @@ library Lists {
         uint index = 0;
         
         /// @notice invariant i >= 0 && i <= self.items.length
-        /// @notice invariant forall (uint k) !(k >= 0 && k < i) || (self.items[k] != val)
+        /// @notice invariant forall (uint k) !(k >= 0 && k < i) || (self.items[k] != val && found == false)
 
         for (uint i = 0; i < self.items.length; i++) {
             if (self.items[i] == val) {
@@ -127,15 +129,18 @@ library Lists {
         return (false, index);
     }
 
+    /// @notice postcondition forall (uint i) !(i >= 0 && i < __verifier_old_uint(self.items.length) && __verifier_old_bool(self.items[i]) == val) || (valid)
+    /// @notice postcondition exists (uint i) !(valid) || (i >= 0 && i < __verifier_old_uint(self.items.length) && __verifier_old_bool(self.items[i]) == val)  
     /// @notice postcondition !valid || self.items[index] == val
     /// @notice postcondition forall (uint i) !valid || !(i >= 0 && i < index) || self.items[i] != val
     /// @notice postcondition forall (uint i) valid || !(i >= 0 && i < self.items.length) || self.items[i] != val
+    /// @notice postcondition !valid || self.items[index] == val
 
     function indexOf(List storage self, bool val) public view returns (bool valid, uint index){
         index = 0;
 
         /// @notice invariant i >= 0 && i <= self.items.length
-        /// @notice invariant forall (uint k) !(k >= 0 && k < i) || (self.items[k] != val)
+        /// @notice invariant forall (uint k) !(k >= 0 && k < i) || (self.items[k] != val && index == 0)
 
         for (uint i = 0; i < self.items.length; i++) {
             if (self.items[i] == val){
@@ -146,8 +151,8 @@ library Lists {
         return (false, index);
     }
 
-    /// @notice postcondition !out || self.items.length == 0
-    /// @notice postcondition out || self.items.length > 0
+    /// @notice postcondition (out && self.items.length == 0) || (!out && !(self.items.length == 0))
+    /// @notice postcondition (!out && self.items.length > 0) || (out && !(self.items.length > 0))
 
     function isEmpty(List storage self) public view returns (bool out) {
         out = self.items.length == 0;

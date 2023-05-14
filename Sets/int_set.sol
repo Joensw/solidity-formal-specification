@@ -65,6 +65,7 @@ library Sets {
     /// @notice precondition forall (int i) !(self.location[i] != 0) || (self.location[i] - 1 < self.items.length) && (self.items[self.location[i] - 1] == i)
     /// @notice postcondition forall (int i) !(self.location[i] != 0) || (self.location[i] - 1 < self.items.length) && (self.items[self.location[i] - 1] == i)
     /// @notice postcondition !(ret) || self.location[num] != 0
+    /// @notice postcondition ret && self.location[num] != 0 || !ret && self.location[num] == 0
 
     function contains(Set storage self, int num) public view returns (bool ret) {
         return self.location[num] != 0;
@@ -85,6 +86,7 @@ library Sets {
     /// @notice postcondition forall (uint i) __verifier_old_uint(self.location[num]) == 0 || !(0 <= i && i < self.items.length) || (self.items[i] == __verifier_old_int(self.items[i]))
     /// @notice postcondition forall (int i) __verifier_old_uint(self.location[num]) == 0 || self.location[i] == __verifier_old_uint(self.location[i])
     /// @notice postcondition (success && __verifier_old_uint(self.location[num]) == 0) || (!success && !(__verifier_old_uint(self.location[num]) == 0))
+    /// @notice postcondition !success && __verifier_old_uint(self.location[num]) != 0 || success && __verifier_old_uint(self.location[num]) == 0
 
     function add(Set storage self, int num) public returns (bool success) {
         if (self.location[num] == 0) {
@@ -116,7 +118,8 @@ library Sets {
     /// @notice postcondition (!success) || (num == __verifier_old_int(self.items[self.items.length - 1])) || self.items[__verifier_old_uint(self.location[num] - 1)] == __verifier_old_int(self.items[self.items.length - 1])
     /// @notice postcondition (!success) || (num == __verifier_old_int(self.items[self.items.length - 1])) || self.location[__verifier_old_int(self.items[self.items.length - 1])] == __verifier_old_uint(self.location[num])
     /// @notice postcondition forall (int i) (!success) || (num == __verifier_old_int(self.items[self.items.length - 1])) || !(i != __verifier_old_int(self.items[self.items.length - 1]) && i != num) || (self.location[i] == __verifier_old_uint(self.location[i]))
-
+    /// @notice postcondition !success && (__verifier_old_uint(self.location[num]) == 0 || __verifier_old_uint(self.items.length) == 0) || success && __verifier_old_uint(self.location[num]) != 0 && __verifier_old_uint(self.items.length) != 0
+    
     function remove(Set storage self, int num) public returns (bool success) {
         if (self.location[num] == 0) return false;
         if (self.items.length == 0) return false;

@@ -81,7 +81,7 @@ library IterableMappings {
     /// @notice postcondition forall (uint i) !(0 <= i && i < self.keys.length) || (self.indexOf[self.keys[i]] - 1 == i)
     /// @notice precondition forall (%TYPE_KEY% a) !(self.indexOf[a] == 0) || (self.values[a] == defaultValue)
     /// @notice postcondition forall (%TYPE_KEY% a) !(self.indexOf[a] == 0) || (self.values[a] == defaultValue)
-    /// @notice postcondition exists (uint i) !out || !(0 <= i && i < self.keys.length) || self.keys[i] == _key
+    /// @notice postcondition exists (uint i) !out || self.keys[i] == _key
     /// @notice postcondition forall (uint i) out || !(0 <= i && i < self.keys.length) || self.keys[i] != _key
 
     function containsKey(IterableMapping storage self, %TYPE_KEY% _key) public view returns (bool out) {
@@ -135,6 +135,8 @@ library IterableMappings {
     /// @notice postcondition !success || (_key == __verifier_old_%TYPE_KEY%(self.keys[self.keys.length - 1])) || self.indexOf[__verifier_old_%TYPE_KEY%(self.keys[self.keys.length - 1])] == __verifier_old_uint(self.indexOf[_key])
     /// @notice postcondition forall (uint i) (!success) || (_key == __verifier_old_%TYPE_KEY%(self.keys[self.keys.length - 1]))  || !(0 <= i && i < self.keys.length && i != __verifier_old_uint(self.indexOf[_key] - 1)) || (self.keys[i] == __verifier_old_%TYPE_KEY%(self.keys[i]))
     /// @notice postcondition forall (%TYPE_KEY% a) (!success) || (_key == __verifier_old_%TYPE_KEY%(self.keys[self.keys.length - 1])) || !(a != __verifier_old_%TYPE_KEY%(self.keys[self.keys.length - 1]) && a != _key) || (self.indexOf[a] == __verifier_old_uint(self.indexOf[a]))
+    /// @notice postcondition exists (uint i) !success || __verifier_old_%TYPE_KEY%(self.keys[i]) == _key
+    /// @notice postcondition forall (uint i) success || !(0 <= i && i < __verifier_old_uint(self.keys.length)) || __verifier_old_%TYPE_KEY%(self.keys[i]) != _key
 
     function remove(IterableMapping storage self, %TYPE_KEY% _key) public returns (bool success) {
         if (self.keys.length == 0) return false;
