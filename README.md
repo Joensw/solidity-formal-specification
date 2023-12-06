@@ -1,26 +1,13 @@
 
 # solidity-formal-specification
-Implementation of particular data structures in Solidity and specification / verification through the [solc-verify](https://github.com/SRI-CSL/solidity) tool.
+This repository contains the Solidity source files of my bachelor's thesis titled *Verifiably Correct Implementations of Basic
+Data Structures in Solidity*.
 
-# Current progress
+Within the scope of my thesis, I created functionally verified implementations of Lists, Sets, Iterable Mappings and Caller Specific Mappings. 
+For each of these data structures, there is a corresponding folder containing implementations with various primitive data types.
 
-## Simple list (with iterator)
-  - [x] implementation
-  - [x] specification 
-  - [x] verified (3 post conditions could be verified for bool lists, the other data types worked fine)
-   
-## Set (with iterator)
-  - [x] implementation
-  - [x] specification  
-  - [x] verified 
-        
-   
-## Iterable Mapping (with iterator)
-  - [x] implementation
-  - [x] specification 
-  - [x] verified (using address as the value for the mapping causes issues with the remove method verification, all other key/value type combinations are verifiable)
+The Experimental folder contains partially verified implementations of some of the data structures with non primitive types.
 
-## Caller Specific Mapping
-  - [x] implementation
-  - [x] specification 
-  - [x] verified
+The tools folder contains the timing and generation tools used.
+
+Further explanations can be found in the [PDF](https://jonas-wille.github.io/assets/files/Thesis.pdf).
